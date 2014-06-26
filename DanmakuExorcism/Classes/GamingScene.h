@@ -5,12 +5,12 @@
 
 USING_NS_CC;
 
-class HelloWorld : public cocos2d::Layer
+class GamingScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(GamingScene);
 private:
 // inner funcs
     void GamePreparing();
@@ -18,8 +18,6 @@ private:
     // callbacks
     void menuCloseCallback(cocos2d::Ref* pSender);
     
-// members
-    Size m_WinSize;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

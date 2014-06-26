@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "GamingScene.h"
 
 USING_NS_CC;
 
@@ -19,7 +19,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLView::create("MainScene");
         director->setOpenGLView(glview);
     }
-    director->getOpenGLView()->setDesignResolutionSize(640, 960, (ResolutionPolicy)2);
+//    director->getOpenGLView()->setDesignResolutionSize(640, 960, (ResolutionPolicy)2);
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -28,7 +28,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = GamingScene::createScene();
 
     // run
     director->runWithScene(scene);
