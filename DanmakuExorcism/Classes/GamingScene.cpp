@@ -1,5 +1,7 @@
 #include "GamingScene.h"
 #include "GamingLayer.h"
+#include "LayerManager.h"
+#include "DataAdapter.h"
 
 Scene* GamingScene::createScene()
 {
@@ -21,18 +23,10 @@ bool GamingScene::init()
 
 void GamingScene::GamePreparing()
 {
+    this->addChild(LayerManager::getInstance());
+    DataAdapter::getInstance()->LoadStageInfo();
     GamingLayer* layer = GamingLayer::create();
-    this->addChild(layer);
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    if (visibleSize.width / visibleSize.height > layer->getContentSize().width / layer->getContentSize().height)
-    {
-        layer->setScale(visibleSize.height / layer->getContentSize().height);
-    } else {
-        layer->setScale(visibleSize.width / layer->getContentSize().width);
-    }
-    
-    layer->setPosition(0, (visibleSize.height - layer->getContentSize().height) / 2);
+    LayerManager::getInstance()->pushLayer(layer);
 }
 
 void GamingScene::menuCloseCallback(Ref* pSender)

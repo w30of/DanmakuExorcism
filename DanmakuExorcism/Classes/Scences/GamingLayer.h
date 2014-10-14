@@ -10,6 +10,11 @@
 #define __DanmakuExorcism__GamingLayer__
 
 #include "cocos2d.h"
+#include "BulletGenerator.h"
+#include "Bullet.h"
+#include "Player.h"
+#include "DanmakuPool.h"
+
 USING_NS_CC;
 
 class GamingLayer : public Layer
@@ -19,11 +24,22 @@ public:
     virtual ~GamingLayer();
     virtual bool init();
     CREATE_FUNC(GamingLayer);
+    
+    bool onTouchBegan(Touch* touch, Event  *event);
+    void onTouchMoved(Touch* touch, Event  *event);
+    void onTouchEnded(Touch* touch, Event  *event);
 private:
-    void prepare();
+    
+    void prepare();                     // data preset
+    void update(float dt);              // main schedule, stage creator
+    void showPlayerBullet(float dt);    // schedule for show player`s bullet
     
     // members
     Size m_WinSize;
+    float m_time;                       // gamelayer duration
+    bool m_isShootPlayerBullet;         // limit player gunfire
+
+    Player* _player;
 };
 
 #endif /* defined(__DanmakuExorcism__GamingLayer__) */

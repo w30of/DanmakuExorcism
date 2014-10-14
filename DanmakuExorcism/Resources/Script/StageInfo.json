@@ -1,0 +1,24 @@
+{
+  "stageinfos": [
+    {
+      "stage": {
+        "stageid": 1,
+        "stagename": "剑墓",
+        "cutin": "",
+        "background": "",
+        "nextstageid": 2,
+        "script": ""
+      }
+    },
+    {
+      "stage": {
+        "stageid": 2,
+        "stagename": "怨树",
+        "cutin": "",
+        "background": "",
+        "nextstageid": 3,
+        "script": ""
+      }
+    }
+  ]
+}
