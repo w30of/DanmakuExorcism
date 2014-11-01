@@ -76,10 +76,10 @@ void Bullet::setTextureByBulletType(BulletType type)
     // there are lots of bullet types
     if (type == BULLET_DAOSHI_A) {
         m_sprite = Sprite::create("bullettest.png");
-        this->addChild(m_sprite);
-        this->setBulletGeneratorType(PLAYER_BULLET);
-        DanmakuPool::getInstance()->push(this);
     }
+    this->addChild(m_sprite);
+    this->setBulletGeneratorType(PLAYER_BULLET);
+    DanmakuPool::getInstance()->push(this);
 }
 
 void Bullet::move(float dt)

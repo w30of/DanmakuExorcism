@@ -36,6 +36,9 @@ private:
     
     PlayerType _playerType;
     CC_SYNTHESIZE(int, _HP, HP);
+    
+    void updateBullets(float dt);
+    bool _isShoot;
 };
 
 #endif /* defined(__DanmakuExorcism__Player__) */

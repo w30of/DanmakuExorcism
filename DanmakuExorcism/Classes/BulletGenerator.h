@@ -10,23 +10,8 @@
 #define __DanmakuExorcism__BulletGenerator__
 
 #include "cocos2d.h"
+#include "Protocol.h"
 USING_NS_CC;
-
-typedef enum
-{
-    PLAYER_BULLET   = 0,
-    ENEMY_BULLET   = 1,
-    ENEMY    = 2,
-    PLAYER   = 3
-    
-}BulletGeneratorType;
-
-typedef enum
-{
-    BULLET_DAOSHI_A = 0,
-    BULLET_BLUE = 1,
-}BulletType;
-
 
 class BulletGenerator : public Node
 {

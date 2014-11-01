@@ -32,12 +32,10 @@ private:
     
     void prepare();                     // data preset
     void update(float dt);              // main schedule, stage creator
-    void showPlayerBullet(float dt);    // schedule for show player`s bullet
     
     // members
     Size m_WinSize;
     float m_time;                       // gamelayer duration
-    bool m_isShootPlayerBullet;         // limit player gunfire
 
     Player* _player;
 };

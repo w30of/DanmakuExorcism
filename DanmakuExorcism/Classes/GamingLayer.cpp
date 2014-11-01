@@ -8,12 +8,12 @@
 
 #include "GamingLayer.h"
 #include "LayerManager.h"
+#include "GameLogic.h"
 
 GamingLayer::GamingLayer()
 {
     _player = nullptr;
     m_time = 0.0f;
-    m_isShootPlayerBullet = false;
 }
 
 GamingLayer::~GamingLayer()
@@ -33,10 +33,14 @@ bool GamingLayer::init()
 
 void GamingLayer::prepare()
 {
+    GameLogic::getInstance()->gLayer = this;
+    
 // preset layer status
     this->setContentSize(Size(640, 960));
     m_WinSize = this->getContentSize();
     this->setAnchorPoint(Point::ZERO);
+    
+    GameLogic::getInstance()->winSize = m_WinSize;
     
     // touch listener
     auto listener = EventListenerTouchOneByOne::create();
@@ -52,20 +56,10 @@ void GamingLayer::prepare()
     
     // show the palyer
     _player = Player::create();
-    this->addChild(_player, 1);
+    this->addChild(_player, ZORDER_PLAYER);
     _player->setPlayerInfo(PLAYER_DAOSHI, 10);
     _player->setPosition(m_WinSize.width / 2, - _player->getContentSize().height / 2);
     _player->runAction(Sequence::create(EaseExponentialOut::create(MoveTo::create(0.6f, Vec2(m_WinSize.width / 2, m_WinSize.height / 5))), NULL));
-    
-    m_isShootPlayerBullet = true;
-    
-    for (int i = 0; i < 20; ++i) {
-        Bullet* playerBlt = Bullet::create();
-        playerBlt->setBulletInfo(BULLET_DAOSHI_A, 90, 2000);
-        playerBlt->bulletDisable();
-        this->addChild(playerBlt, 2);
-    }
-    schedule(schedule_selector(GamingLayer::showPlayerBullet), 0.1f);
     
     // to show the time flow
     auto lbTime = Label::createWithSystemFont("test", "Helvetica-Bold", 22);
@@ -115,38 +109,9 @@ void GamingLayer::update(float dt)
     // create stage info
 }
 
-void GamingLayer::showPlayerBullet(float dt)
-{
-    // player gun fire
-    if (m_isShootPlayerBullet) {
-        int bulletNum  = 0;
-        for (auto e : DanmakuPool::getInstance()->v_playerBullet) {
-            if (e) {
-                if (bulletNum > 1) {
-                    break;
-                }
-                Bullet* blt = (Bullet*)e;
-                if (!blt->getBulletEnable()) {
-                    blt->setPosition(_player->getPosition() + Vec2(bulletNum * 20 - 10, 0));
-                    blt->bulletEnable();
-                    ++bulletNum;
-                }
-            }
-        }
-        for (; bulletNum < 2; ++bulletNum) {
-            Bullet* playerBlt = Bullet::create();
-            playerBlt->setBulletInfo(BULLET_DAOSHI_A, 90, 2000);
-            playerBlt->bulletEnable();
-            playerBlt->setPosition(_player->getPosition() + Vec2(bulletNum * 20 - 10, 0));
-            this->addChild(playerBlt, 2);
-        }
-    }
-}
-
 bool GamingLayer::onTouchBegan(Touch* touch, Event  *event)
 {
-    m_isShootPlayerBullet = true;
-    
+    _player->shoot(true);
     return true;
 }
 
@@ -179,8 +144,7 @@ void GamingLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 
 void GamingLayer::onTouchEnded(Touch* touch, Event  *event)
 {
-    m_isShootPlayerBullet = false;
-    
+    _player->shoot(false);
     auto location = touch->getLocation();
 }
 

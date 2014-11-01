@@ -24,7 +24,8 @@ bool GamingScene::init()
 void GamingScene::GamePreparing()
 {
     this->addChild(LayerManager::getInstance());
-    DataAdapter::getInstance()->LoadStageInfo();
+    DataAdapter::getInstance()->LoadStageList();
+    DataAdapter::getInstance()->LoadEnemyList(1);
     GamingLayer* layer = GamingLayer::create();
     LayerManager::getInstance()->pushLayer(layer);
 }

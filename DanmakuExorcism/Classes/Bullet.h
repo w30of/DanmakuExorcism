@@ -17,8 +17,10 @@ class Bullet : public BulletGenerator
 public:
     CREATE_FUNC(Bullet);
     
+    // will add bullet to danmaku pool
     void setBulletInfo(BulletType bulletType, float angle, float velocityLength);
     void setBulletInfo(BulletType bulletType, Vec2 angle, float velocityLength);
+    // enable to show and move, disable to stop and hide
     void bulletEnable();
     void bulletDisable();
     

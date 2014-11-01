@@ -1,0 +1,17 @@
+{
+  "enemyinfo": [
+    {
+      "enemy": {
+        "enemyid": 0,
+        "txrid": 0,
+        "shootcount": -1,
+        "shootdelay": 0,
+        "shootitv": 1,
+        "dmkid": 1,
+        "showtime": 1.2,
+        "showpos": "100,100",
+        "customscript": ""
+      }
+    }
+  ]
+}
