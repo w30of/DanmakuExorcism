@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "ProtocolAnalytics.h"
 #include "ProtocolIAP.h"
 #include "ProtocolShare.h"
+#include "ProtocolSocial.h"
+#include "ProtocolUser.h"
 #include "PluginUtilsIOS.h"
 
 #import <Foundation/Foundation.h>
@@ -33,6 +35,8 @@ THE SOFTWARE.
 #import "InterfaceAnalytics.h"
 #import "InterfaceIAP.h"
 #import "InterfaceShare.h"
+#import "InterfaceSocial.h"
+#import "InterfaceUser.h"
 
 namespace cocos2d { namespace plugin {
 
@@ -75,7 +79,14 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
 	{
 		if (name == NULL || strlen(name) == 0) break;
 
-        NSString* className = [NSString stringWithUTF8String:name];
+		NSString* className = [NSString stringWithUTF8String:name];
+		Class theClass = NSClassFromString(className);
+		if (theClass == nil)
+		{
+			PluginUtilsIOS::outputLog("Unable to load class '%s'. Did you add the -ObjC linker flag?", name);
+			break;
+		}
+
         id obj = [[NSClassFromString(className) alloc] init];
         if (obj == nil) break;
 
@@ -90,6 +101,12 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceShare)]) {
             pRet = new ProtocolShare();
+        } else
+        if ([obj conformsToProtocol:@protocol(InterfaceSocial)]) {
+            pRet = new ProtocolSocial();
+        } else
+        if ([obj conformsToProtocol:@protocol(InterfaceUser)]) {
+            pRet = new ProtocolUser();
         } else {
             PluginUtilsIOS::outputLog("Plugin %s not implements a right protocol", name);
         }
