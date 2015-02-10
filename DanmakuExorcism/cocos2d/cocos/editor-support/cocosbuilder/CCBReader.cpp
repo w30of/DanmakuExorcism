@@ -719,10 +719,12 @@ Node * CCBReader::readNodeGraph(Node * pParent)
         NodeLoaderListener * nodeAsNodeLoaderListener = dynamic_cast<NodeLoaderListener *>(node);
         if(nodeAsNodeLoaderListener != nullptr)
         {
+            nodeAsNodeLoaderListener->setAnimationManager(this->getAnimationManager());
             nodeAsNodeLoaderListener->onNodeLoaded(node, ccNodeLoader);
         }
         else if(this->_nodeLoaderListener != nullptr)
         {
+            nodeAsNodeLoaderListener->setAnimationManager(this->getAnimationManager());
             this->_nodeLoaderListener->onNodeLoaded(node, ccNodeLoader);
         }
     }

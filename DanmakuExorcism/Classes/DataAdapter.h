@@ -18,11 +18,10 @@ class DataAdapter
 public:
     static DataAdapter *getInstance();
     
+    std::vector<StageInfo> v_stageList;
+    std::vector<EnemyInfo> v_EnemyInfoList;
     bool LoadStageList();
     bool LoadEnemyList(int stageID);
-    
-    std::vector<StageInfo> v_stageList;
-    std::vector<EnemyInfo> v_EnemyList;
     
     std::vector<std::string> split(std::string str,std::string pattern);
     

@@ -380,6 +380,7 @@ long TableView::__indexFromOffset(Vec2 offset)
         else if (search < cellStart)
         {
             high = index - 1;
+//            if (high < 0) return -1;
         }
         else
         {

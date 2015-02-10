@@ -19,6 +19,8 @@ public:
     static DanmakuPool *getInstance();
     
     void push(BulletGenerator* pBG);
+    BulletGenerator* getPlayerBullet();
+    BulletGenerator* getEnemyBullet();
     
     std::vector<BulletGenerator*> v_player;
     std::vector<BulletGenerator*> v_enemy;
@@ -29,6 +31,7 @@ private:
     DanmakuPool();
     virtual ~DanmakuPool();
     
+    BulletGenerator* getBulletByType(BulletGeneratorType type);
 };
 
 #endif /* defined(__DanmakuExorcism__DanmakuPool__) */

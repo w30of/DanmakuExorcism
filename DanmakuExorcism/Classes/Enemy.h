@@ -20,7 +20,8 @@ public:
     CREATE_FUNC(Enemy);
     
     void setEnemyInfo(EnemyInfo info);
-    void setDanmaku(Danmaku* danmaku);
+    EnemyInfo getEnemyInfo();
+    void die();
     
 private:
     Enemy();
@@ -32,8 +33,11 @@ private:
     EnemyInfo m_enemyInfo;
     Danmaku* m_danmaku;
     
+    Sprite* _sp;
+    
     void setSprite();
     void setEnemyBehavior();
+    void setDanmaku();
 };
 
 #endif /* defined(__DanmakuExorcism__Enemy__) */

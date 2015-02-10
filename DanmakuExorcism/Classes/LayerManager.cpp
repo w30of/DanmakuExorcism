@@ -7,6 +7,7 @@
 //
 
 #include "LayerManager.h"
+#include "CCBLayerLoader.h"
 
 static LayerManager *s_layerManager = nullptr;
 
@@ -56,18 +57,72 @@ void LayerManager::prepare()
         this->setPosition(0, (visibleSize.height - this->getContentSize().height * sclRate) / 2);
     }
 }
+/*
+ Wanna add a layer? You should:
+ 1. Create your layer class
+ 2. Add an enum variable in Protocol.h
+ 3. Add a loader in CCBLayerLoader.h
+ 4. Add a case below
+ */
+Node* LayerManager::getCCB(CCBClassType classType, Ref* pOwner /* = nullptr */)
+{
+    std::string strCCBFileName;
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::newDefaultNodeLoaderLibrary();
+    
+    switch (classType) {
+        case CCB_LY_HOME:{
+            ccNodeLoaderLibrary->registerNodeLoader("LyHome", LyHomeLoader::loader());
+            strCCBFileName = "lyHome.ccbi";
+        }
+            break;
+        case CCB_LY_SELECT_PLAYER:{
+            ccNodeLoaderLibrary->registerNodeLoader("LySelectPlayer", LySelectPlayerLoader::loader());
+            strCCBFileName = "lySelectPlayer.ccbi";
+        }
+            break;
+        default:
+            return nullptr;
+            break;
+    }
+    
+    CCBReader * ccbReader = new CCBReader(ccNodeLoaderLibrary);
+//    ccbReader->getAnimationManager();
+    Node * node = nullptr;
+    if (pOwner) {
+        node = ccbReader->readNodeGraphFromFile(strCCBFileName.c_str(), pOwner);
+    } else {
+        node = ccbReader->readNodeGraphFromFile(strCCBFileName.c_str());
+    }
+    
+    ccbReader->autorelease();
+    
+    return node;
+}
 
 void LayerManager::pushLayer(cocos2d::Node *pNode)
 {
     if (pNode) {
         addChild(pNode);
+        pNode->setPositionX(-64);
         v_layers.push_back(pNode);
     } else {
         log("pNode invalid! --LayerManager::pushLayer");
     }
 }
 
-void LayerManager::closeLayer(int num /*= 1*/)
+Node* LayerManager::pushLayer(CCBClassType classType)
+{
+    Node* pNodeGet = getCCB(classType);
+    if (pNodeGet) {
+        pushLayer(pNodeGet);
+        return pNodeGet;
+    } else {
+        CCLOG("Failed to get ccb from ccb class type");
+        return nullptr;
+    }
+}
+
+void LayerManager::closeLayer(int num /* = 1 */)
 {
     if (v_layers.size() > num) {
         for (int i = 0; i < num; ++i) {

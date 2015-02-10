@@ -20,12 +20,21 @@ typedef enum
     PLAYER_JIANKE  = 2,
 }PlayerType;
 
+struct PlayerInfo{
+    PlayerType pType;
+    std::string pName;
+    std::string picName;
+    std::string pDesc;
+};
+
 class Player : public BulletGenerator
 {
 public:
     CREATE_FUNC(Player);
     void setPlayerInfo(PlayerType type, int hp);
+    void setContainerSize(Size s);
     void shoot(bool isShoot);
+    void move(Touch* touch);
     
 protected:
     Player();
@@ -33,12 +42,14 @@ protected:
     virtual bool init() override;
 private:
     void initialize();
+    void updateBullets(float dt);
     
     PlayerType _playerType;
     CC_SYNTHESIZE(int, _HP, HP);
-    
-    void updateBullets(float dt);
+    Sprite* _sp;
+    Size _containerSize;
     bool _isShoot;
+    bool _hasInit;
 };
 
 #endif /* defined(__DanmakuExorcism__Player__) */

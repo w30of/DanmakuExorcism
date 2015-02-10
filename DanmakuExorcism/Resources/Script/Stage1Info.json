@@ -5,11 +5,14 @@
         "enemyid": 0,
         "txrid": 0,
         "shootcount": -1,
-        "shootdelay": 0,
+        "shootdelay": 1,
         "shootitv": 1,
-        "dmkid": 1,
+        "dmkid": 0,
         "showtime": 1.2,
-        "showpos": "100,100",
+        "showcount": 1,
+        "showitv": 0,
+        "showpos": "320,800",
+        "showposoff": "0,0",
         "customscript": ""
       }
     }

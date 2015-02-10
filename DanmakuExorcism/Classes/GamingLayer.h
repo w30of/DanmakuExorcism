@@ -28,6 +28,8 @@ public:
     bool onTouchBegan(Touch* touch, Event  *event);
     void onTouchMoved(Touch* touch, Event  *event);
     void onTouchEnded(Touch* touch, Event  *event);
+    
+    void setPlayerType(PlayerType type);
 private:
     
     void prepare();                     // data preset

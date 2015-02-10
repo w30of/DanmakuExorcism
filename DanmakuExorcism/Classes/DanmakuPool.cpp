@@ -7,6 +7,8 @@
 //
 
 #include "DanmakuPool.h"
+#include "Bullet.h"
+#include "GameLogic.h"
 
 static DanmakuPool *s_danmakuPool = nullptr;
 
@@ -49,7 +51,49 @@ void DanmakuPool::push(BulletGenerator *pBG)
     }
 }
 
+BulletGenerator* DanmakuPool::getPlayerBullet()
+{
+    return getBulletByType(PLAYER_BULLET);
+}
 
+BulletGenerator* DanmakuPool::getEnemyBullet()
+{
+    return getBulletByType(ENEMY_BULLET);
+}
+
+
+
+// private funcs...
+BulletGenerator* DanmakuPool::getBulletByType(BulletGeneratorType type)
+{
+    // Seek a free bullet from danmaku pool
+    if (type == ENEMY_BULLET && v_enemyBullet.size() > 0) {
+        for (int i = 0; i < v_enemyBullet.size(); ++i) {
+            Bullet* bullet = (Bullet*)v_enemyBullet.at(i);
+            if (!bullet->getBulletEnable()) {
+                bullet->defaultInfo();
+                return bullet;
+            }
+        }
+    } else if (type == PLAYER_BULLET && v_playerBullet.size() > 0) {
+        for (int i = 0; i < v_playerBullet.size(); ++i) {
+            Bullet* bullet = (Bullet*)v_playerBullet.at(i);
+            if (!bullet->getBulletEnable()) {
+                bullet->defaultInfo();
+                return bullet;
+            }
+        }
+    }
+    
+    // Has no free bullet, create one
+    Bullet* blt = Bullet::create();
+    blt->defaultInfo();
+    blt->bulletDisable();   // Bullet is disable at firsts
+    blt->setBulletGeneratorType(type);
+    GameLogic::addEnemyBullet(blt);         // Add it to layer for show
+    DanmakuPool::getInstance()->push(blt);  // Will add to the matched danmaku pool by BulletGeneratorType
+    return blt;
+}
 
 
 

@@ -17,16 +17,30 @@ class Danmaku : public Node
 {
 public:
     CREATE_FUNC(Danmaku);
-    void setDanmakuOwner(Node* pOwner);
+    CC_SYNTHESIZE(Node*, _pOwner, Owner);
+    CC_SYNTHESIZE(DanmakuType, _danmakuType, DanmakuType);
+    CC_SYNTHESIZE(float, _delay, Delay);
+    CC_SYNTHESIZE(int, _count, Count);
+    CC_SYNTHESIZE(float, _interval, Interval);
+    
+    void run();
+    void stop();
     
 private:
     Danmaku();
     virtual ~Danmaku();
+    // Members
+    int _schOffset;
+    short _schExtOffset;
+    
+    // Private funcs...
     virtual bool init() override;
-    
     void initialize();
+    void showDanmaku();
     
-    Node* m_pOwner;
+    // Danmakus...
+    // Stage 1
+    void danmaku_1_1(float dt);
 };
 
 #endif /* defined(__DanmakuExorcism__Danmaku__) */

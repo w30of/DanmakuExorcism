@@ -11,8 +11,12 @@
 
 #include "cocos2d.h"
 #include "Protocol.h"
+#include "cocos-ext.h"
+#include "cocosbuilder/CocosBuilder.h"
 
 USING_NS_CC;
+USING_NS_CC_EXT;
+using namespace cocosbuilder;
 
 class LayerManager : public Layer
 {
@@ -23,7 +27,11 @@ public:
     static LayerManager *getInstance();
     
     // funcs...
+    Node* getCCB(CCBClassType classType, Ref* pOwner = nullptr);
+    // show layer
     void pushLayer(Node*);
+    Node* pushLayer(CCBClassType classType);
+    // close layer
     void closeLayer(int num = 1);
     void closeLayer(Node*);
     void closeAll();

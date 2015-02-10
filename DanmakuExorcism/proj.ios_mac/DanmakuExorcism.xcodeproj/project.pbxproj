@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F040C651A5AD0AA00C3339D /* ccbres in Resources */ = {isa = PBXBuildFile; fileRef = 0F040C641A5AD0AA00C3339D /* ccbres */; };
+		0F1520B91A6D348500963630 /* enemy_bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B51A6D348500963630 /* enemy_bullet.png */; };
+		0F1520BA1A6D348500963630 /* enemy_bullet_blue_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */; };
+		0F1520BB1A6D348500963630 /* enemy_bullet_red_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */; };
+		0F1520C01A6D349100963630 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520BD1A6D349100963630 /* background.png */; };
+		0F1520C11A6D349100963630 /* player_daoshi.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520BE1A6D349100963630 /* player_daoshi.png */; };
+		0F1520C21A6D349100963630 /* playertest.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520BF1A6D349100963630 /* playertest.png */; };
+		0F509B951A59863100CCE1BD /* LyHome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F509B931A59863100CCE1BD /* LyHome.cpp */; };
+		0F51BCFA1A7E684700DF98FD /* daoshi_mian.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F51BCF91A7E684700DF98FD /* daoshi_mian.png */; };
+		0F51BD041A7E909900DF98FD /* players in Resources */ = {isa = PBXBuildFile; fileRef = 0F51BD031A7E909900DF98FD /* players */; };
+		0F59F2BC1A7929640015315D /* empty_block.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F59F2BB1A7929640015315D /* empty_block.png */; };
 		0F60846F1A13AA2B005F9DE9 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F6084581A13AA2B005F9DE9 /* Bullet.cpp */; };
 		0F6084701A13AA2B005F9DE9 /* BulletGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F60845A1A13AA2B005F9DE9 /* BulletGenerator.cpp */; };
 		0F6084711A13AA2B005F9DE9 /* Danmaku.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F60845C1A13AA2B005F9DE9 /* Danmaku.cpp */; };
@@ -20,12 +31,9 @@
 		0F6084791A13AA2B005F9DE9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F60846C1A13AA2B005F9DE9 /* Player.cpp */; };
 		0F6084841A13AB1C005F9DE9 /* Stage1Info.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847B1A13AB1C005F9DE9 /* Stage1Info.json */; };
 		0F6084851A13AB1C005F9DE9 /* StageList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847C1A13AB1C005F9DE9 /* StageList.json */; };
-		0F6084861A13AB1C005F9DE9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847E1A13AB1C005F9DE9 /* background.png */; };
-		0F6084871A13AB1C005F9DE9 /* bullettest.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847F1A13AB1C005F9DE9 /* bullettest.png */; };
-		0F6084881A13AB1C005F9DE9 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F6084801A13AB1C005F9DE9 /* CloseNormal.png */; };
-		0F6084891A13AB1C005F9DE9 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F6084811A13AB1C005F9DE9 /* CloseSelected.png */; };
-		0F60848A1A13AB1C005F9DE9 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F6084821A13AB1C005F9DE9 /* HelloWorld.png */; };
-		0F60848B1A13AB1C005F9DE9 /* playertest.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F6084831A13AB1C005F9DE9 /* playertest.png */; };
+		0FC31BE31A6577B4001F0C1B /* lyHome.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = 0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */; };
+		0FC31BE41A6577B4001F0C1B /* lySelectPlayer.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = 0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */; };
+		0FFA20461A5C27B600D5F6A9 /* LySelectPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA20441A5C27B600D5F6A9 /* LySelectPlayer.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -107,6 +115,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F040C641A5AD0AA00C3339D /* ccbres */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ccbres; sourceTree = "<group>"; };
+		0F1520B51A6D348500963630 /* enemy_bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet.png; sourceTree = "<group>"; };
+		0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_blue_1.png; sourceTree = "<group>"; };
+		0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_red_1.png; sourceTree = "<group>"; };
+		0F1520BD1A6D349100963630 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		0F1520BE1A6D349100963630 /* player_daoshi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_daoshi.png; sourceTree = "<group>"; };
+		0F1520BF1A6D349100963630 /* playertest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playertest.png; sourceTree = "<group>"; };
+		0F509B921A59860100CCE1BD /* CCBLayerLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCBLayerLoader.h; sourceTree = "<group>"; };
+		0F509B931A59863100CCE1BD /* LyHome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LyHome.cpp; sourceTree = "<group>"; };
+		0F509B941A59863100CCE1BD /* LyHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyHome.h; sourceTree = "<group>"; };
+		0F51BCF91A7E684700DF98FD /* daoshi_mian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daoshi_mian.png; sourceTree = "<group>"; };
+		0F51BD031A7E909900DF98FD /* players */ = {isa = PBXFileReference; lastKnownFileType = folder; path = players; sourceTree = "<group>"; };
+		0F59F2BB1A7929640015315D /* empty_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_block.png; sourceTree = "<group>"; };
 		0F6084581A13AA2B005F9DE9 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		0F6084591A13AA2B005F9DE9 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		0F60845A1A13AA2B005F9DE9 /* BulletGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletGenerator.cpp; sourceTree = "<group>"; };
@@ -132,12 +153,10 @@
 		0F60846E1A13AA2B005F9DE9 /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
 		0F60847B1A13AB1C005F9DE9 /* Stage1Info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stage1Info.json; sourceTree = "<group>"; };
 		0F60847C1A13AB1C005F9DE9 /* StageList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StageList.json; sourceTree = "<group>"; };
-		0F60847E1A13AB1C005F9DE9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		0F60847F1A13AB1C005F9DE9 /* bullettest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullettest.png; sourceTree = "<group>"; };
-		0F6084801A13AB1C005F9DE9 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
-		0F6084811A13AB1C005F9DE9 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		0F6084821A13AB1C005F9DE9 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
-		0F6084831A13AB1C005F9DE9 /* playertest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playertest.png; sourceTree = "<group>"; };
+		0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; path = lyHome.ccbi; sourceTree = "<group>"; };
+		0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; path = lySelectPlayer.ccbi; sourceTree = "<group>"; };
+		0FFA20441A5C27B600D5F6A9 /* LySelectPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LySelectPlayer.cpp; sourceTree = "<group>"; };
+		0FFA20451A5C27B600D5F6A9 /* LySelectPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySelectPlayer.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -244,6 +263,77 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		0F1520B31A6D348500963630 /* bullets */ = {
+			isa = PBXGroup;
+			children = (
+				0F51BCF91A7E684700DF98FD /* daoshi_mian.png */,
+				0F1520B51A6D348500963630 /* enemy_bullet.png */,
+				0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */,
+				0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */,
+			);
+			path = bullets;
+			sourceTree = "<group>";
+		};
+		0F1520BC1A6D349100963630 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				0F1520BD1A6D349100963630 /* background.png */,
+				0F1520BE1A6D349100963630 /* player_daoshi.png */,
+				0F1520BF1A6D349100963630 /* playertest.png */,
+				0F59F2BB1A7929640015315D /* empty_block.png */,
+			);
+			path = texture;
+			sourceTree = "<group>";
+		};
+		0F4B46911A14E7F700B79286 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0F509B921A59860100CCE1BD /* CCBLayerLoader.h */,
+				0F6084661A13AA2B005F9DE9 /* GamingLayer.cpp */,
+				0F6084671A13AA2B005F9DE9 /* GamingLayer.h */,
+				0F6084681A13AA2B005F9DE9 /* GamingScene.cpp */,
+				0F6084691A13AA2B005F9DE9 /* GamingScene.h */,
+				0F509B931A59863100CCE1BD /* LyHome.cpp */,
+				0F509B941A59863100CCE1BD /* LyHome.h */,
+				0FFA20441A5C27B600D5F6A9 /* LySelectPlayer.cpp */,
+				0FFA20451A5C27B600D5F6A9 /* LySelectPlayer.h */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		0F4B46921A14E81900B79286 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				0F60845A1A13AA2B005F9DE9 /* BulletGenerator.cpp */,
+				0F60845B1A13AA2B005F9DE9 /* BulletGenerator.h */,
+				0F60845E1A13AA2B005F9DE9 /* DanmakuPool.cpp */,
+				0F60845F1A13AA2B005F9DE9 /* DanmakuPool.h */,
+				0F6084601A13AA2B005F9DE9 /* DataAdapter.cpp */,
+				0F6084611A13AA2B005F9DE9 /* DataAdapter.h */,
+				0F6084641A13AA2B005F9DE9 /* GameLogic.cpp */,
+				0F6084651A13AA2B005F9DE9 /* GameLogic.h */,
+				0F60846A1A13AA2B005F9DE9 /* LayerManager.cpp */,
+				0F60846B1A13AA2B005F9DE9 /* LayerManager.h */,
+				0F60846E1A13AA2B005F9DE9 /* Protocol.h */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		0F4B46931A14E84000B79286 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				0F6084581A13AA2B005F9DE9 /* Bullet.cpp */,
+				0F6084591A13AA2B005F9DE9 /* Bullet.h */,
+				0F60845C1A13AA2B005F9DE9 /* Danmaku.cpp */,
+				0F60845D1A13AA2B005F9DE9 /* Danmaku.h */,
+				0F6084621A13AA2B005F9DE9 /* Enemy.cpp */,
+				0F6084631A13AA2B005F9DE9 /* Enemy.h */,
+				0F60846C1A13AA2B005F9DE9 /* Player.cpp */,
+				0F60846D1A13AA2B005F9DE9 /* Player.h */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 		0F60847A1A13AB1C005F9DE9 /* Script */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,17 +343,14 @@
 			path = Script;
 			sourceTree = "<group>";
 		};
-		0F60847D1A13AB1C005F9DE9 /* texture */ = {
+		0FC31BE01A6577B4001F0C1B /* ccb */ = {
 			isa = PBXGroup;
 			children = (
-				0F60847E1A13AB1C005F9DE9 /* background.png */,
-				0F60847F1A13AB1C005F9DE9 /* bullettest.png */,
-				0F6084801A13AB1C005F9DE9 /* CloseNormal.png */,
-				0F6084811A13AB1C005F9DE9 /* CloseSelected.png */,
-				0F6084821A13AB1C005F9DE9 /* HelloWorld.png */,
-				0F6084831A13AB1C005F9DE9 /* playertest.png */,
+				0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */,
+				0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */,
 			);
-			path = texture;
+			name = ccb;
+			path = ccbi/ccb;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -323,8 +410,12 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F51BD031A7E909900DF98FD /* players */,
+				0FC31BE01A6577B4001F0C1B /* ccb */,
 				0F60847A1A13AB1C005F9DE9 /* Script */,
-				0F60847D1A13AB1C005F9DE9 /* texture */,
+				0F040C641A5AD0AA00C3339D /* ccbres */,
+				0F1520BC1A6D349100963630 /* texture */,
+				0F1520B31A6D348500963630 /* bullets */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -333,31 +424,11 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0F4B46921A14E81900B79286 /* Logic */,
+				0F4B46911A14E7F700B79286 /* UI */,
+				0F4B46931A14E84000B79286 /* Elements */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				0F6084581A13AA2B005F9DE9 /* Bullet.cpp */,
-				0F6084591A13AA2B005F9DE9 /* Bullet.h */,
-				0F60845A1A13AA2B005F9DE9 /* BulletGenerator.cpp */,
-				0F60845B1A13AA2B005F9DE9 /* BulletGenerator.h */,
-				0F60845C1A13AA2B005F9DE9 /* Danmaku.cpp */,
-				0F60845D1A13AA2B005F9DE9 /* Danmaku.h */,
-				0F60845E1A13AA2B005F9DE9 /* DanmakuPool.cpp */,
-				0F60845F1A13AA2B005F9DE9 /* DanmakuPool.h */,
-				0F6084601A13AA2B005F9DE9 /* DataAdapter.cpp */,
-				0F6084611A13AA2B005F9DE9 /* DataAdapter.h */,
-				0F6084621A13AA2B005F9DE9 /* Enemy.cpp */,
-				0F6084631A13AA2B005F9DE9 /* Enemy.h */,
-				0F6084641A13AA2B005F9DE9 /* GameLogic.cpp */,
-				0F6084651A13AA2B005F9DE9 /* GameLogic.h */,
-				0F6084661A13AA2B005F9DE9 /* GamingLayer.cpp */,
-				0F6084671A13AA2B005F9DE9 /* GamingLayer.h */,
-				0F6084681A13AA2B005F9DE9 /* GamingScene.cpp */,
-				0F6084691A13AA2B005F9DE9 /* GamingScene.h */,
-				0F60846A1A13AA2B005F9DE9 /* LayerManager.cpp */,
-				0F60846B1A13AA2B005F9DE9 /* LayerManager.h */,
-				0F60846C1A13AA2B005F9DE9 /* Player.cpp */,
-				0F60846D1A13AA2B005F9DE9 /* Player.h */,
-				0F60846E1A13AA2B005F9DE9 /* Protocol.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -458,7 +529,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = MDDB52YB8L;
+						DevelopmentTeam = 2XXWDRLQ87;
 					};
 				};
 			};
@@ -510,31 +581,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FC31BE31A6577B4001F0C1B /* lyHome.ccbi in Resources */,
+				0F1520C11A6D349100963630 /* player_daoshi.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
-				0F6084871A13AB1C005F9DE9 /* bullettest.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				0FC31BE41A6577B4001F0C1B /* lySelectPlayer.ccbi in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
+				0F51BD041A7E909900DF98FD /* players in Resources */,
 				0F6084841A13AB1C005F9DE9 /* Stage1Info.json in Resources */,
+				0F1520B91A6D348500963630 /* enemy_bullet.png in Resources */,
+				0F1520C01A6D349100963630 /* background.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
-				0F60848B1A13AB1C005F9DE9 /* playertest.png in Resources */,
-				0F6084881A13AB1C005F9DE9 /* CloseNormal.png in Resources */,
-				0F6084891A13AB1C005F9DE9 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
-				0F60848A1A13AB1C005F9DE9 /* HelloWorld.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				0F6084851A13AB1C005F9DE9 /* StageList.json in Resources */,
+				0F040C651A5AD0AA00C3339D /* ccbres in Resources */,
+				0F59F2BC1A7929640015315D /* empty_block.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
-				0F6084861A13AB1C005F9DE9 /* background.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				0F1520BA1A6D348500963630 /* enemy_bullet_blue_1.png in Resources */,
+				0F1520BB1A6D348500963630 /* enemy_bullet_red_1.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				0F51BCFA1A7E684700DF98FD /* daoshi_mian.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
+				0F1520C21A6D349100963630 /* playertest.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,11 +635,13 @@
 				0F6084731A13AA2B005F9DE9 /* DataAdapter.cpp in Sources */,
 				0F60846F1A13AA2B005F9DE9 /* Bullet.cpp in Sources */,
 				0F6084741A13AA2B005F9DE9 /* Enemy.cpp in Sources */,
+				0FFA20461A5C27B600D5F6A9 /* LySelectPlayer.cpp in Sources */,
 				0F6084761A13AA2B005F9DE9 /* GamingLayer.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				0F6084781A13AA2B005F9DE9 /* LayerManager.cpp in Sources */,
 				0F6084721A13AA2B005F9DE9 /* DanmakuPool.cpp in Sources */,
+				0F509B951A59863100CCE1BD /* LyHome.cpp in Sources */,
 				0F6084701A13AA2B005F9DE9 /* BulletGenerator.cpp in Sources */,
 				0F6084771A13AA2B005F9DE9 /* GamingScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -602,6 +681,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -622,6 +702,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -634,6 +715,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -652,6 +734,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

@@ -37,10 +37,10 @@ void GamingLayer::prepare()
     
 // preset layer status
     this->setContentSize(Size(640, 960));
-    m_WinSize = this->getContentSize();
     this->setAnchorPoint(Point::ZERO);
-    
+    m_WinSize = this->getContentSize();
     GameLogic::getInstance()->winSize = m_WinSize;
+    GameLogic::setGameRect(Rect(0, 0, m_WinSize.width, m_WinSize.height));
     
     // touch listener
     auto listener = EventListenerTouchOneByOne::create();
@@ -53,13 +53,6 @@ void GamingLayer::prepare()
     
 // let the game go
     this->scheduleUpdate();
-    
-    // show the palyer
-    _player = Player::create();
-    this->addChild(_player, ZORDER_PLAYER);
-    _player->setPlayerInfo(PLAYER_DAOSHI, 10);
-    _player->setPosition(m_WinSize.width / 2, - _player->getContentSize().height / 2);
-    _player->runAction(Sequence::create(EaseExponentialOut::create(MoveTo::create(0.6f, Vec2(m_WinSize.width / 2, m_WinSize.height / 5))), NULL));
     
     // to show the time flow
     auto lbTime = Label::createWithSystemFont("test", "Helvetica-Bold", 22);
@@ -83,6 +76,21 @@ void GamingLayer::prepare()
     this->addChild(sprBg2);
 }
 
+// show the palyer
+void GamingLayer::setPlayerType(PlayerType type)
+{
+    if (type == PLAYER_DAOSHI) {
+        _player = Player::create();
+        this->addChild(_player, ZORDER_PLAYER);
+        _player->setPlayerInfo(PLAYER_DAOSHI, 10);
+        _player->setPosition(m_WinSize.width / 2, - _player->getContentSize().height / 2);
+        _player->runAction(Sequence::create(EaseExponentialOut::create(MoveTo::create(0.6f, Vec2(m_WinSize.width / 2, m_WinSize.height / 5))), NULL));
+        _player->setContainerSize(this->getContentSize());
+        
+        GameLogic::getInstance()->gPlayer = _player;
+    }
+}
+
 void GamingLayer::update(float dt)
 {
     // show the label of time
@@ -92,60 +100,31 @@ void GamingLayer::update(float dt)
     
     // background move
     Sprite* bg1 = (Sprite*)getChildByTag(7);
-    if (bg1) {
-        bg1->setPositionY(bg1->getPositionY() - 100*dt);
-        if (bg1->getPositionY() < -m_WinSize.height) {
-            bg1->setPositionY(m_WinSize.height);
-        }
-    }
     Sprite* bg2 = (Sprite*)getChildByTag(8);
-    if (bg2) {
-        bg2->setPositionY(bg2->getPositionY() - 100*dt);
-        if (bg2->getPositionY() < -m_WinSize.height) {
-            bg2->setPositionY(m_WinSize.height);
-        }
-    }
+    GameLogic::getInstance()->autoMove(bg1, bg2, -100*dt);
     
-    // create stage info
+    // create enemy by time
+    GameLogic::getInstance()->createEnemy(m_time);
 }
 
 bool GamingLayer::onTouchBegan(Touch* touch, Event  *event)
 {
+    if (!_player) return false;
     _player->shoot(true);
     return true;
 }
 
 void GamingLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
 {
-    auto posMoveOffset = touch->getLocation() - touch->getPreviousLocation();
-    if (_player) {
-        // player move by finger
-        _player->setPosition(_player->getPosition() + posMoveOffset / this->getScale());
-        
-        // player should in screen
-        if (_player->getPositionX() - _player->getContentSize().width / 2 < 0)
-        {
-            _player->setPositionX(_player->getContentSize().width / 2);
-        }
-        if (_player->getPositionX() + _player->getContentSize().width / 2 > m_WinSize.width)
-        {
-            _player->setPositionX(m_WinSize.width - _player->getContentSize().width / 2);
-        }
-        if (_player->getPositionY() - _player->getContentSize().height / 2 < 0)
-        {
-            _player->setPositionY(_player->getContentSize().height / 2);
-        }
-        if (_player->getPositionY() + _player->getContentSize().height > m_WinSize.height)
-        {
-            _player->setPositionY(m_WinSize.height - _player->getContentSize().height / 2);
-        }
-    }
+    if (!_player) return;
+    
+    _player->move(touch);
 }
 
 void GamingLayer::onTouchEnded(Touch* touch, Event  *event)
 {
+    if (!_player) return;
     _player->shoot(false);
-    auto location = touch->getLocation();
 }
 
 

@@ -26,8 +26,9 @@ void GamingScene::GamePreparing()
     this->addChild(LayerManager::getInstance());
     DataAdapter::getInstance()->LoadStageList();
     DataAdapter::getInstance()->LoadEnemyList(1);
-    GamingLayer* layer = GamingLayer::create();
-    LayerManager::getInstance()->pushLayer(layer);
+//    GamingLayer* layer = GamingLayer::create();
+    
+    LayerManager::getInstance()->pushLayer(CCB_LY_HOME);
 }
 
 void GamingScene::menuCloseCallback(Ref* pSender)

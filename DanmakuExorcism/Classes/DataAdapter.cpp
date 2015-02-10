@@ -1,4 +1,4 @@
-//
+    //
 //  DataAdapter.cpp
 //  DanmakuExorcism
 //
@@ -120,9 +120,9 @@ bool DataAdapter::LoadEnemyList(int stageID)
     ssize_t size = 0;
     unsigned char *pBytes = nullptr;
     
-    pBytes =  cocos2d::CCFileUtils::getInstance()->getFileData(String::createWithFormat("Script/%s", stageFileName.c_str())->getCString(), "r", &size);
+    pBytes =  cocos2d::CCFileUtils::getInstance()->getFileData(String::createWithFormat("%s", stageFileName.c_str())->getCString(), "r", &size);
     if (pBytes == nullptr || strcmp((char*)pBytes, "") == 0) {
-        log("\n\n---- LoadEnemyList File %s Read Error! ----\n", String::createWithFormat("Script/%s", stageFileName.c_str())->getCString());
+        log("\n\n---- LoadEnemyList File %s Read Error! ----\n", String::createWithFormat("%s", stageFileName.c_str())->getCString());
         return nullptr;
     }
     
@@ -163,7 +163,10 @@ bool DataAdapter::LoadEnemyList(int stageID)
                 valueEnt.HasMember("shootitv") &&
                 valueEnt.HasMember("dmkid") &&
                 valueEnt.HasMember("showtime") &&
+                valueEnt.HasMember("showcount") &&
+                valueEnt.HasMember("showitv") &&
                 valueEnt.HasMember("showpos") &&
+                valueEnt.HasMember("showposoff") &&
                 valueEnt.HasMember("customscript") )
             {
                 const rapidjson::Value &enemyid = valueEnt["enemyid"];
@@ -173,7 +176,10 @@ bool DataAdapter::LoadEnemyList(int stageID)
                 const rapidjson::Value &shootitv = valueEnt["shootitv"];
                 const rapidjson::Value &dmkid = valueEnt["dmkid"];
                 const rapidjson::Value &showtime = valueEnt["showtime"];
+                const rapidjson::Value &showcount = valueEnt["showcount"];
+                const rapidjson::Value &showitv = valueEnt["showitv"];
                 const rapidjson::Value &showpos = valueEnt["showpos"];
+                const rapidjson::Value &showposoff = valueEnt["showposoff"];
                 const rapidjson::Value &customscript = valueEnt["customscript"];
                 
                 EnemyInfo enemyInfo;
@@ -184,15 +190,22 @@ bool DataAdapter::LoadEnemyList(int stageID)
                 enemyInfo.ShootInterval = shootitv.GetDouble();
                 enemyInfo.DmkID = (DanmakuType)dmkid.GetInt();
                 enemyInfo.ShowTime = showtime.GetDouble();
+                enemyInfo.ShowCount = showcount.GetInt();
+                enemyInfo.ShowInterval = showitv.GetDouble();
                 std::vector<std::string> vPos = split(showpos.GetString(), ",");
                 enemyInfo.ShowPos = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
+                vPos = split(showposoff.GetString(), ",");
+                enemyInfo.ShowPosOff = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
                 enemyInfo.CustomScript = customscript.GetString();
                 
-                this->v_EnemyList.push_back(enemyInfo);
+                this->v_EnemyInfoList.push_back(enemyInfo);
                 log("enemy ID : %d", enemyInfo.EnemyID);
             }
         }
     }
+    
+    std::sort(v_EnemyInfoList.begin(), v_EnemyInfoList.end(), [](const EnemyInfo ef1,const EnemyInfo ef2){return true;});
+    
     log("\n\n---- Load enemy info successful! ----\n");
     
     return true;
@@ -203,16 +216,16 @@ std::vector<std::string> DataAdapter::split(std::string str,std::string pattern)
     std::string::size_type pos;
     std::vector<std::string> result;
     str += pattern;
-    int size=str.size();
+    int size = (int)str.size();
     
-    for(int i=0; i<size; i++)
+    for(int i = 0; i < size; i++)
     {
-        pos=str.find(pattern,i);
-        if(pos<size)
+        pos = str.find(pattern,i);
+        if(pos < size)
         {
-            std::string s=str.substr(i,pos-i);
+            std::string s = str.substr(i, pos - i);
             result.push_back(s);
-            i=pos+pattern.size()-1;
+            i = (int)(pos + pattern.size() - 1);
         }
     }
     return result;
