@@ -259,7 +259,7 @@ void LySelectPlayer::switchPlayer(int idxOff)
         } else {
             playAnime("switchRight", callfunc_selector(LySelectPlayer::aniCall_PlayerShoot));
         }
-        this->runAction(Sequence::create(DelayTime::create(0.36),
+        this->runAction(Sequence::create(DelayTime::create(0.2),
                                          CallFunc::create([=](){m_player->shoot(true);}),
                                          NULL));
         
@@ -350,20 +350,20 @@ void TreasureCell::setTreasureInfo(TreasureInfo ti)
 {
     m_ti = ti;
     std::string strName;
-    strName.append(ti.Name);
+    strName.append(m_ti.Name);
     strName.append(" ");
-    strName.append(StringUtils::format("Lv.%d",ti.lv));
+    strName.append(StringUtils::format("Lv.%d",m_ti.lv));
     
     if (m_hasInit) {
         m_hasInit = true;
-        m_spIcon->setTexture(ti.IconName);
+        m_spIcon->setTexture(m_ti.IconName);
         m_lbName->setString(strName.c_str());
-        m_lbDesc->setString(ti.Desc);
+        m_lbDesc->setString(m_ti.Desc);
     } else {
         m_lycBackground = LayerColor::create(Color4B(0, 0, 0, 0), 280, 100);
         this->addChild(m_lycBackground);
         
-        m_spIcon = Sprite::create(ti.IconName);
+        m_spIcon = Sprite::create(m_ti.IconName);
         m_spIcon->setPosition(Vec2(50, 50));
         this->addChild(m_spIcon);
         
