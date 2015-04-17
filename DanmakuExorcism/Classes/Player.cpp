@@ -17,11 +17,15 @@ Player::Player()
     _isShoot = true;
     _sp = nullptr;
     _hasInit = false;
+    _aniIdle = nullptr;
+    _aniSide = nullptr;
+    _dir = DIR_UP;
 }
 
 Player::~Player()
 {
-    
+    _aniIdle->release();
+    _aniSide->release();
 }
 
 bool Player::init()
@@ -44,7 +48,6 @@ void Player::initialize()
         bi.BulletID = BULLET_DAOSHI_A;
         bi.v = 2000;
         bi.a = 90;
-//        playerBlt->setBulletInfo(BULLET_DAOSHI_A, 90, 2000);
         playerBlt->setBulletInfo(bi);
         playerBlt->bulletDisable();
         GameLogic::addPlayerBullet(playerBlt);
@@ -77,6 +80,38 @@ void Player::setPlayerInfo(PlayerType type, int hp)
     if (!_hasInit) {
         _hasInit = true;
         _sp = Sprite::create(strFileName);
+        
+        SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();
+        frameCache->addSpriteFramesWithFile("players/daoshi/daoshi.plist");
+        
+        _aniIdle = Animation::create();
+        for (int i = 0; i < 3; ++i) {
+            std::ostringstream nameStream;
+            nameStream << "n_" << i << ".png";
+            SpriteFrame* frame = frameCache->getSpriteFrameByName(nameStream.str().c_str());
+            _aniIdle->addSpriteFrame(frame);
+        }
+        SpriteFrame* frame = frameCache->getSpriteFrameByName("n_1.png");
+        _aniIdle->addSpriteFrame(frame);
+        _aniIdle->setDelayPerUnit(0.1f);
+        _aniIdle->setLoops(-1);
+        _aniIdle->retain();
+        
+        _aniSide = Animation::create();
+        for (int i = 0; i < 3; ++i) {
+            std::ostringstream nameStream;
+            nameStream << "s_" << i << ".png";
+            SpriteFrame* frame = frameCache->getSpriteFrameByName(nameStream.str().c_str());
+            _aniSide->addSpriteFrame(frame);
+        }
+        SpriteFrame* frame1 = frameCache->getSpriteFrameByName("s_1.png");
+        _aniSide->addSpriteFrame(frame1);
+        _aniSide->setDelayPerUnit(0.1f);
+        _aniSide->setLoops(-1);
+        _aniSide->retain();
+        
+        _sp->runAction(Animate::create(_aniIdle));
+        
         this->addChild(_sp, 0);
     } else {
         _sp->setTexture(strFileName);
@@ -102,6 +137,11 @@ void Player::move(cocos2d::Touch *touch)
     auto posMoveOffset = touch->getLocation() - touch->getPreviousLocation();
     // player move by finger
     this->setPosition(this->getPosition() + posMoveOffset);// / this->getScale()
+    if (posMoveOffset.x > 0) {
+        moveAnimate(DIR_RIGHT);
+    } else if (posMoveOffset.x < 0) {
+        moveAnimate(DIR_LEFT);
+    }
     
     // player should in screen
     if (this->getPositionX() - _sp->getContentSize().width / 2 < 0)
@@ -122,6 +162,11 @@ void Player::move(cocos2d::Touch *touch)
     }
 }
 
+void Player::idle()
+{
+    moveAnimate(DIR_NONE);
+}
+
 // private :
 
 void Player::updateBullets(float dt)
@@ -137,6 +182,28 @@ void Player::updateBullets(float dt)
             blt->bulletEnable();
         }
     }
+}
+
+void Player::moveAnimate(Direction dir)
+{
+    if (dir == _dir) {
+        return;
+    }
+    _sp->stopAllActions();
+    _dir = dir;
+    
+    Animate* a = nullptr;
+    if (dir == DIR_LEFT) {
+        a = Animate::create(_aniSide);
+        _sp->setFlippedX(true);
+    } else if (dir == DIR_RIGHT) {
+        a = Animate::create(_aniSide);
+        _sp->setFlippedX(false);
+    } else {
+        a = Animate::create(_aniIdle);
+        _sp->setFlippedX(false);
+    }
+    _sp->runAction(a);
 }
 
 

@@ -39,7 +39,6 @@ void Bullet::initialize()
 // public funcs...
 void Bullet::setBulletInfo(BulletInfo bltInfo)
 {
-//    float agl = CC_DEGREES_TO_RADIANS(bltInfo.a);
     m_v = Vec2::forAngle(bltInfo.a).getNormalized();
     setTextureByBulletType(bltInfo.BulletID);
     m_bltInfo = bltInfo;
@@ -65,8 +64,8 @@ void Bullet::bulletEnable()
     updateV();
     updateRotate();
     setBulletEnable(true);
-    this->setVisible(true);
-    schedule(schedule_selector(Bullet::move));
+    setVisible(true);
+    this->schedule(schedule_selector(Bullet::move));
 }
 
 void Bullet::bulletDisable()
@@ -74,6 +73,15 @@ void Bullet::bulletDisable()
     setBulletEnable(false);
     this->setVisible(false);
     unschedule(schedule_selector(Bullet::move));
+}
+
+void Bullet::setAngle(float a)
+{
+    m_bltInfo.a = a;
+//    float a = m_v.getAngle();
+    if (m_sprite) {
+        m_sprite->setRotation(-CC_RADIANS_TO_DEGREES(a));
+    }
 }
 
 
@@ -118,7 +126,7 @@ void Bullet::setTextureByBulletType(BulletType type)
 void Bullet::updateV()
 {
     if (m_bltInfo.vLimit) {
-        if ((m_bltInfo.vLimit > 0 && m_bltInfo.v >= m_bltInfo.vLimit) || (m_bltInfo.vLimit < 0 && m_bltInfo.v <= m_bltInfo.vLimit)) {
+        if ((m_bltInfo.vOff > 0 && m_bltInfo.v >= m_bltInfo.vLimit) || (m_bltInfo.vOff < 0 && m_bltInfo.v <= m_bltInfo.vLimit)) {
             m_bltInfo.v = m_bltInfo.vLimit;
         } else {
             if (m_bltInfo.vOff) {

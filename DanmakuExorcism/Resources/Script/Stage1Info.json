@@ -4,14 +4,147 @@
       "enemy": {
         "enemyid": 0,
         "txrid": 0,
-        "shootcount": -1,
-        "shootdelay": 1,
-        "shootitv": 1,
-        "dmkid": 0,
-        "showtime": 1.2,
+        "shootcount": 3,
+        "shootdelay": 0,
+        "shootitv": 0.3,
+        "dmkid": 1,
+        "showtime": 1,
+        "showcount": 3,
+        "showitv": 0.8,
+        "showpos": "0.3,0.7",
+        "showposoff": "-60,30",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 1,
+        "txrid": 0,
+        "shootcount": 3,
+        "shootdelay": 0,
+        "shootitv": 0.3,
+        "dmkid": 1,
+        "showtime": 1.4,
+        "showcount": 3,
+        "showitv": 0.8,
+        "showpos": "0.7,0.7",
+        "showposoff": "60,30",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 2,
+        "txrid": 0,
+        "shootcount": 30,
+        "shootdelay": 0,
+        "shootitv": 0.01,
+        "dmkid": 3,
+        "showtime": 3,
         "showcount": 1,
         "showitv": 0,
-        "showpos": "320,800",
+        "showpos": "0.5,0.8",
+        "showposoff": "0,0",
+        "customscript": ""
+      }
+    },
+    {
+      "stagelogo": {
+        "showtime": 5
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 3,
+        "txrid": 0,
+        "shootcount": -1,
+        "shootdelay": 0,
+        "shootitv": 0.2,
+        "dmkid": 4,
+        "showtime": 7,
+        "showcount": 2,
+        "showitv": 2,
+        "showpos": "0.2,0.8",
+        "showposoff": "0,-200",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 4,
+        "txrid": 0,
+        "shootcount": -1,
+        "shootdelay": 0,
+        "shootitv": 0.2,
+        "dmkid": 5,
+        "showtime": 8,
+        "showcount": 2,
+        "showitv": 2,
+        "showpos": "0.8,0.8",
+        "showposoff": "0,-200",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 5,
+        "txrid": 0,
+        "shootcount": 1,
+        "shootdelay": 0,
+        "shootitv": 0.2,
+        "dmkid": 6,
+        "showtime": 12,
+        "showcount": 5,
+        "showitv": 0.5,
+        "showpos": "0,0.7",
+        "showposoff": "0,20",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 6,
+        "txrid": 0,
+        "shootcount": 7,
+        "shootdelay": 0,
+        "shootitv": 0.2,
+        "dmkid": 7,
+        "showtime": 14,
+        "showcount": 1,
+        "showitv": 0.5,
+        "showpos": "0.3,0.7",
+        "showposoff": "0,20",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 7,
+        "txrid": 0,
+        "shootcount": 3,
+        "shootdelay": 0,
+        "shootitv": 0.5,
+        "dmkid": 8,
+        "showtime": 17,
+        "showcount": 7,
+        "showitv": 0.4,
+        "showpos": "0,0.6",
+        "showposoff": "0,0",
+        "customscript": ""
+      }
+    },
+    {
+      "enemy": {
+        "enemyid": 8,
+        "txrid": 0,
+        "shootcount": 3,
+        "shootdelay": 0,
+        "shootitv": 0.5,
+        "dmkid": 8,
+        "showtime": 17.1,
+        "showcount": 7,
+        "showitv": 0.4,
+        "showpos": "0,0.4",
         "showposoff": "0,0",
         "customscript": ""
       }

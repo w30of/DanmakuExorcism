@@ -42,20 +42,7 @@ bool LayerManager::init()
 
 void LayerManager::prepare()
 {
-    this->setContentSize(Size(640,960));
     this->setAnchorPoint(Point::ZERO);
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    if (visibleSize.width / visibleSize.height > this->getContentSize().width / this->getContentSize().height)
-    {
-        this->setScale(visibleSize.height / this->getContentSize().height);
-        float sclRate = visibleSize.height / this->getContentSize().height;
-        this->setPosition((visibleSize.width - this->getContentSize().width * sclRate) / 2, 0);
-    } else {
-        this->setScale(visibleSize.width / this->getContentSize().width);
-        float sclRate = visibleSize.width / this->getContentSize().width;
-        this->setPosition(0, (visibleSize.height - this->getContentSize().height * sclRate) / 2);
-    }
 }
 /*
  Wanna add a layer? You should:
@@ -99,11 +86,13 @@ Node* LayerManager::getCCB(CCBClassType classType, Ref* pOwner /* = nullptr */)
     return node;
 }
 
-void LayerManager::pushLayer(cocos2d::Node *pNode)
+void LayerManager::pushLayer(cocos2d::Node *pNode, bool shouldResetPos)
 {
     if (pNode) {
+        if (shouldResetPos) {
+            pNode->setPosition(Vec2(0, 0) - originOffset);
+        }
         addChild(pNode);
-        pNode->setPositionX(-64);
         v_layers.push_back(pNode);
     } else {
         log("pNode invalid! --LayerManager::pushLayer");

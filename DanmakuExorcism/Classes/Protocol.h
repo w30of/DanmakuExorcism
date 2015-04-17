@@ -48,6 +48,12 @@ typedef enum
 
 typedef enum
 {
+    BUFFER_BULLET = 0,
+}CustomBulletType;
+
+
+typedef enum
+{
     SHOW_AUTO_OFFSET    = 0,
     SHOW_ALL_CUNTOM     = 1,
     SHOW_RANDOM         = 2,
@@ -56,15 +62,26 @@ typedef enum
 
 typedef enum
 {
-    DANMAKU_NONE        = -1,
-    DANMAKU_ENEMY_1_1    = 0,
-    DANMAKU_ENEMY_1_2    = 1,
+    DANMAKU_NONE        = 0,
+    DANMAKU_ENEMY_1_1   = 1,
+    DANMAKU_ENEMY_1_3   = 3,
+    DANMAKU_ENEMY_1_4   = 4,
+    DANMAKU_ENEMY_1_5   = 5,
+    DANMAKU_ENEMY_1_6   = 6,
+    DANMAKU_ENEMY_1_7   = 7,
+    DANMAKU_ENEMY_1_8   = 8,
 }DanmakuType;
 
 typedef enum
 {
     ENEMY_1_1     = 0,
     ENEMY_1_2     = 1,
+    ENEMY_1_3     = 2,
+    ENEMY_1_4     = 3,
+    ENEMY_1_5     = 4,
+    ENEMY_1_6     = 5,
+    ENEMY_1_7     = 6,
+    ENEMY_1_8     = 7,
 }EnemyType;
 
 typedef enum
@@ -85,6 +102,15 @@ typedef enum
     TREASURE_CALABASH = 0,
     TREASURE_SOUL_STONE = 1,
 }TreasureType;
+
+typedef enum
+{
+    DIR_NONE = 0,
+    DIR_LEFT,
+    DIR_RIGHT,
+    DIR_UP,
+    DIR_DOWN
+}Direction;
 
 
 

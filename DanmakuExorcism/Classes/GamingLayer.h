@@ -30,6 +30,7 @@ public:
     void onTouchEnded(Touch* touch, Event  *event);
     
     void setPlayerType(PlayerType type);
+    void showLogo(int stageID);
 private:
     
     void prepare();                     // data preset

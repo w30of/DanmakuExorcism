@@ -26,10 +26,25 @@ public:
     Size gameSize;
     
     // function
+    static void addBullet(Bullet* blt);
     static void addPlayerBullet(Bullet* bullet);
     static void addEnemyBullet(Bullet* bullet);
     static void defaultBltInfo(BulletInfo &bltInfo);
     static void setGameRect(Rect vRect);
+    static void clearDanmakuContainer();
+    static float getLineAngle(Vec2 p1, Vec2 p2);
+    static float getAngleToPlayer(Vec2 p);
+    static Bullet* setBullet(BulletGeneratorType type,
+                             BulletType bID,
+                             Vec2 pos,
+                             float v,
+                             float a,
+                             float vl = 0,
+                             float al = 0,
+                             float voff = 0,
+                             float aoff = 0,
+                             float vex = 0,
+                             float aex = 0);
     
     void createEnemy(float time);
     void autoMove(Sprite* sp1, Sprite* sp2, float speed);

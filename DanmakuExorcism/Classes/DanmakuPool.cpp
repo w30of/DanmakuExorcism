@@ -61,6 +61,15 @@ BulletGenerator* DanmakuPool::getEnemyBullet()
     return getBulletByType(ENEMY_BULLET);
 }
 
+void DanmakuPool::clearPool()
+{
+    v_player.clear();
+    v_enemy.clear();
+    v_playerBullet.clear();
+    v_enemyBullet.clear();
+    GameLogic::clearDanmakuContainer();
+}
+
 
 
 // private funcs...
@@ -90,7 +99,13 @@ BulletGenerator* DanmakuPool::getBulletByType(BulletGeneratorType type)
     blt->defaultInfo();
     blt->bulletDisable();   // Bullet is disable at firsts
     blt->setBulletGeneratorType(type);
-    GameLogic::addEnemyBullet(blt);         // Add it to layer for show
+    // Add it to layer for show
+    if (type == PLAYER_BULLET) {
+        GameLogic::addPlayerBullet(blt);
+    } else if (ENEMY_BULLET) {
+        GameLogic::addEnemyBullet(blt);
+    }
+    
     DanmakuPool::getInstance()->push(blt);  // Will add to the matched danmaku pool by BulletGeneratorType
     return blt;
 }

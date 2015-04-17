@@ -53,7 +53,6 @@ private:
     void prepare();
     void switchPlayer(int idxOff);
     void protectIdx();
-    void aniCall_PlayerShoot();
     
     bool zoneTouchBegan(Touch* touch, Event  *event);
     void zoneTouchMoved(Touch* touch, Event  *event);
@@ -92,7 +91,6 @@ class TreasureCell : public cocos2d::extension::TableViewCell
 public:
     TreasureCell();
     virtual ~TreasureCell();
-//    virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags) override;
     
     void setTreasureInfo(TreasureInfo ti);
     bool select();

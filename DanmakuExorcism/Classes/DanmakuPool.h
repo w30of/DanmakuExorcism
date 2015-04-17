@@ -21,6 +21,7 @@ public:
     void push(BulletGenerator* pBG);
     BulletGenerator* getPlayerBullet();
     BulletGenerator* getEnemyBullet();
+    void clearPool();
     
     std::vector<BulletGenerator*> v_player;
     std::vector<BulletGenerator*> v_enemy;

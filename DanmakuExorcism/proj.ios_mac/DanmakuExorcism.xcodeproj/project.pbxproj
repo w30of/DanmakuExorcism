@@ -11,6 +11,7 @@
 		0F1520B91A6D348500963630 /* enemy_bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B51A6D348500963630 /* enemy_bullet.png */; };
 		0F1520BA1A6D348500963630 /* enemy_bullet_blue_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */; };
 		0F1520BB1A6D348500963630 /* enemy_bullet_red_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */; };
+		0F4E33F81AD54F4800EF67BE /* example_Blur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0F4E33F71AD54F4800EF67BE /* example_Blur.fsh */; };
 		0F509B951A59863100CCE1BD /* LyHome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F509B931A59863100CCE1BD /* LyHome.cpp */; };
 		0F51BCFA1A7E684700DF98FD /* daoshi_mian.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F51BCF91A7E684700DF98FD /* daoshi_mian.png */; };
 		0F51BD041A7E909900DF98FD /* players in Resources */ = {isa = PBXBuildFile; fileRef = 0F51BD031A7E909900DF98FD /* players */; };
@@ -25,11 +26,12 @@
 		0F6084771A13AA2B005F9DE9 /* GamingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F6084681A13AA2B005F9DE9 /* GamingScene.cpp */; };
 		0F6084781A13AA2B005F9DE9 /* LayerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F60846A1A13AA2B005F9DE9 /* LayerManager.cpp */; };
 		0F6084791A13AA2B005F9DE9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F60846C1A13AA2B005F9DE9 /* Player.cpp */; };
-		0F6084841A13AB1C005F9DE9 /* Stage1Info.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847B1A13AB1C005F9DE9 /* Stage1Info.json */; };
-		0F6084851A13AB1C005F9DE9 /* StageList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F60847C1A13AB1C005F9DE9 /* StageList.json */; };
-		0FC31BE31A6577B4001F0C1B /* lyHome.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = 0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */; };
-		0FC31BE41A6577B4001F0C1B /* lySelectPlayer.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = 0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */; };
+		0FB7DFC41ACFFC2E009FE7A1 /* logo_stage1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB7DFC31ACFFC2E009FE7A1 /* logo_stage1.png */; };
+		0FBF62041A9343ED00164C46 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 0FBF62031A9343ED00164C46 /* ccb */; };
 		0FC549E91A8BB62400FE3080 /* texture in Resources */ = {isa = PBXBuildFile; fileRef = 0FC549E81A8BB62400FE3080 /* texture */; };
+		0FE3369F1A98AEF60021F5B4 /* Stage1Info.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FE3369C1A98AEF60021F5B4 /* Stage1Info.json */; };
+		0FE336A01A98AEF60021F5B4 /* StageList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FE3369D1A98AEF60021F5B4 /* StageList.json */; };
+		0FE336A11A98AEF60021F5B4 /* tis.w3t in Resources */ = {isa = PBXBuildFile; fileRef = 0FE3369E1A98AEF60021F5B4 /* tis.w3t */; };
 		0FFA20461A5C27B600D5F6A9 /* LySelectPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA20441A5C27B600D5F6A9 /* LySelectPlayer.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
@@ -116,6 +118,7 @@
 		0F1520B51A6D348500963630 /* enemy_bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet.png; sourceTree = "<group>"; };
 		0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_blue_1.png; sourceTree = "<group>"; };
 		0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_red_1.png; sourceTree = "<group>"; };
+		0F4E33F71AD54F4800EF67BE /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Blur.fsh; sourceTree = "<group>"; };
 		0F509B921A59860100CCE1BD /* CCBLayerLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCBLayerLoader.h; sourceTree = "<group>"; };
 		0F509B931A59863100CCE1BD /* LyHome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LyHome.cpp; sourceTree = "<group>"; };
 		0F509B941A59863100CCE1BD /* LyHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyHome.h; sourceTree = "<group>"; };
@@ -144,11 +147,12 @@
 		0F60846C1A13AA2B005F9DE9 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		0F60846D1A13AA2B005F9DE9 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		0F60846E1A13AA2B005F9DE9 /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
-		0F60847B1A13AB1C005F9DE9 /* Stage1Info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stage1Info.json; sourceTree = "<group>"; };
-		0F60847C1A13AB1C005F9DE9 /* StageList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StageList.json; sourceTree = "<group>"; };
-		0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; path = lyHome.ccbi; sourceTree = "<group>"; };
-		0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; path = lySelectPlayer.ccbi; sourceTree = "<group>"; };
+		0FB7DFC31ACFFC2E009FE7A1 /* logo_stage1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_stage1.png; sourceTree = "<group>"; };
+		0FBF62031A9343ED00164C46 /* ccb */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ccb; path = ccbi/ccb; sourceTree = "<group>"; };
 		0FC549E81A8BB62400FE3080 /* texture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = texture; sourceTree = "<group>"; };
+		0FE3369C1A98AEF60021F5B4 /* Stage1Info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stage1Info.json; sourceTree = "<group>"; };
+		0FE3369D1A98AEF60021F5B4 /* StageList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StageList.json; sourceTree = "<group>"; };
+		0FE3369E1A98AEF60021F5B4 /* tis.w3t */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tis.w3t; sourceTree = "<group>"; };
 		0FFA20441A5C27B600D5F6A9 /* LySelectPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LySelectPlayer.cpp; sourceTree = "<group>"; };
 		0FFA20451A5C27B600D5F6A9 /* LySelectPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LySelectPlayer.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
@@ -317,23 +321,31 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
-		0F60847A1A13AB1C005F9DE9 /* Script */ = {
+		0F4E33F61AD54F3D00EF67BE /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				0F60847B1A13AB1C005F9DE9 /* Stage1Info.json */,
-				0F60847C1A13AB1C005F9DE9 /* StageList.json */,
+				0F4E33F71AD54F4800EF67BE /* example_Blur.fsh */,
 			);
-			path = Script;
+			path = shaders;
 			sourceTree = "<group>";
 		};
-		0FC31BE01A6577B4001F0C1B /* ccb */ = {
+		0FB7DFC01ACFFC19009FE7A1 /* stage1 */ = {
 			isa = PBXGroup;
 			children = (
-				0FC31BE11A6577B4001F0C1B /* lyHome.ccbi */,
-				0FC31BE21A6577B4001F0C1B /* lySelectPlayer.ccbi */,
+				0FB7DFC31ACFFC2E009FE7A1 /* logo_stage1.png */,
 			);
-			name = ccb;
-			path = ccbi/ccb;
+			name = stage1;
+			path = texture/stage1;
+			sourceTree = "<group>";
+		};
+		0FE3369B1A98AEF60021F5B4 /* script */ = {
+			isa = PBXGroup;
+			children = (
+				0FE3369C1A98AEF60021F5B4 /* Stage1Info.json */,
+				0FE3369D1A98AEF60021F5B4 /* StageList.json */,
+				0FE3369E1A98AEF60021F5B4 /* tis.w3t */,
+			);
+			path = script;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -393,12 +405,14 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0F4E33F61AD54F3D00EF67BE /* shaders */,
 				0F51BD031A7E909900DF98FD /* players */,
-				0FC31BE01A6577B4001F0C1B /* ccb */,
-				0F60847A1A13AB1C005F9DE9 /* Script */,
+				0FE3369B1A98AEF60021F5B4 /* script */,
+				0FBF62031A9343ED00164C46 /* ccb */,
 				0F040C641A5AD0AA00C3339D /* ccbres */,
 				0FC549E81A8BB62400FE3080 /* texture */,
 				0F1520B31A6D348500963630 /* bullets */,
+				0FB7DFC01ACFFC19009FE7A1 /* stage1 */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -564,27 +578,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC31BE31A6577B4001F0C1B /* lyHome.ccbi in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
-				0FC31BE41A6577B4001F0C1B /* lySelectPlayer.ccbi in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				0F51BD041A7E909900DF98FD /* players in Resources */,
-				0F6084841A13AB1C005F9DE9 /* Stage1Info.json in Resources */,
 				0F1520B91A6D348500963630 /* enemy_bullet.png in Resources */,
+				0FE336A01A98AEF60021F5B4 /* StageList.json in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				0FB7DFC41ACFFC2E009FE7A1 /* logo_stage1.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				0FE336A11A98AEF60021F5B4 /* tis.w3t in Resources */,
+				0FE3369F1A98AEF60021F5B4 /* Stage1Info.json in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				0F4E33F81AD54F4800EF67BE /* example_Blur.fsh in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
-				0F6084851A13AB1C005F9DE9 /* StageList.json in Resources */,
 				0F040C651A5AD0AA00C3339D /* ccbres in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				0FBF62041A9343ED00164C46 /* ccb in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				0F1520BA1A6D348500963630 /* enemy_bullet_blue_1.png in Resources */,
 				0F1520BB1A6D348500963630 /* enemy_bullet_red_1.png in Resources */,

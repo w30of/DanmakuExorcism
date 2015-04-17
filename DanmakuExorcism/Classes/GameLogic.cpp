@@ -33,6 +33,15 @@ GameLogic::~GameLogic()
 }
 
 // static functions...
+void GameLogic::addBullet(Bullet *blt)
+{
+    if (blt->getBulletGeneratorType() == ENEMY_BULLET) {
+        GameLogic::getInstance()->gLayer->addChild(blt, ZORDER_ENEMY_BULLET);
+    } else if (blt->getBulletGeneratorType() == PLAYER_BULLET) {
+        GameLogic::getInstance()->gLayer->addChild(blt, ZORDER_PLAYER_BULLET);
+    }
+}
+
 void GameLogic::addPlayerBullet(Bullet *bullet)
 {
     GameLogic::getInstance()->gLayer->addChild(bullet, ZORDER_PLAYER_BULLET);
@@ -60,13 +69,22 @@ void GameLogic::defaultBltInfo(BulletInfo &bltInfo)
 void GameLogic::createEnemy(float time)
 {
     // No enemy to create should pause.
-    if (DataAdapter::getInstance()->v_EnemyInfoList.size() == 0 && m_vDupEnemyInfos.size() == 0) {
+    DataAdapter* data = DataAdapter::getInstance();
+    
+    if (!data->logoHasShown && time >= data->logoShowTime) {
+        if (gLayer) {
+            ((GamingLayer*)gLayer)->showLogo(data->playingStageID);
+            data->logoHasShown = true;
+        }
+    }
+    
+    if (data->v_EnemyInfoList.size() == 0 && m_vDupEnemyInfos.size() == 0) {
         return;
     }
     
     // Create enemy in enemy list of stage.
-    if (DataAdapter::getInstance()->v_EnemyInfoList.size() > 0) {
-        EnemyInfo ef = DataAdapter::getInstance()->v_EnemyInfoList.back();
+    if (data->v_EnemyInfoList.size() > 0) {
+        EnemyInfo ef = data->v_EnemyInfoList.back();
         if (time >= ef.ShowTime)
         {
             addEnemy(ef);
@@ -76,7 +94,7 @@ void GameLogic::createEnemy(float time)
                 --ef.ShowCount;
                 m_vDupEnemyInfos.push_back(ef);
             }
-            DataAdapter::getInstance()->v_EnemyInfoList.pop_back();
+            data->v_EnemyInfoList.pop_back();
         }
     }
     
@@ -121,6 +139,66 @@ void GameLogic::setGameRect(cocos2d::Rect vRect)
     GameLogic::getInstance()->gameSize = vRect.size;
 }
 
+void GameLogic::clearDanmakuContainer()
+{
+    if (GameLogic::getInstance()->gLayer) {
+        GameLogic::getInstance()->gLayer->removeAllChildren();
+        GameLogic::getInstance()->gLayer = nullptr;
+    }
+}
+
+float GameLogic::getLineAngle(cocos2d::Vec2 p1, cocos2d::Vec2 p2)
+{
+    Vec2 dir = p1 - p2;
+    float a = dir.getAngle();
+    return a;
+}
+
+float GameLogic::getAngleToPlayer(cocos2d::Vec2 p)
+{
+    if (GameLogic::getInstance()->gPlayer) {
+        float angle = getLineAngle(GameLogic::getInstance()->gPlayer->getPosition(), p);
+        angle = CC_RADIANS_TO_DEGREES(angle);
+        return angle;
+    } else {
+        return 0;
+    }
+}
+
+Bullet* GameLogic::setBullet(BulletGeneratorType type,
+                             BulletType bID,
+                             Vec2 pos,
+                             float v,
+                             float a,
+                             float vl/* = 0*/,
+                             float al/* = 0*/,
+                             float voff/* = 0*/,
+                             float aoff/* = 0*/,
+                             float vex/* = 0*/,
+                             float aex/* = 0*/)
+{
+    Bullet* blt = Bullet::create();
+    blt->setPosition(pos);
+    blt->setBulletGeneratorType(type);
+    BulletInfo bi;
+    GameLogic::defaultBltInfo(bi);
+    bi.BulletID = bID;
+    bi.v = v;
+    //    bi.a = CC_RADIANS_TO_DEGREES(a);
+    bi.a = a;
+    bi.vLimit = vl;
+    bi.aLimit = al;
+    bi.vOff = voff;
+    bi.aOff = aoff;
+    bi.vExOff = vex;
+    bi.aExOff = aex;
+    blt->setBulletInfo(bi);
+    blt->bulletEnable();
+    
+    GameLogic::addBullet(blt);
+    
+    return blt;
+}
 
 
 

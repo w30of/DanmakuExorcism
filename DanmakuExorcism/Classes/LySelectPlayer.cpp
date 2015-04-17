@@ -9,6 +9,7 @@
 #include "LySelectPlayer.h"
 #include "LayerManager.h"
 #include "GameLogic.h"
+#include "DataAdapter.h"
 
 LySelectPlayer::LySelectPlayer()
 : spPlayer(nullptr)
@@ -71,10 +72,12 @@ void LySelectPlayer::onOK(cocos2d::Ref *sender, cocos2d::extension::Control::Eve
         btnLeft->setEnabled(false);
     } else {
         // Go to fight!
+        m_player->shoot(false);
+        DanmakuPool::getInstance()->clearPool();
         LayerManager::getInstance()->closeAll();
         GamingLayer* layer = GamingLayer::create();
         layer->setPlayerType(PLAYER_DAOSHI);
-        LayerManager::getInstance()->pushLayer(layer);
+        LayerManager::getInstance()->pushLayer(layer, false);
     }
 }
 
@@ -82,6 +85,7 @@ void LySelectPlayer::onBack(cocos2d::Ref *sender, cocos2d::extension::Control::E
 {
     if (m_isSelectingPlayer) {
         // Return to main layer
+        DanmakuPool::getInstance()->clearPool();
         LayerManager::getInstance()->closeAll();
         LayerManager::getInstance()->pushLayer(CCB_LY_HOME);
     } else {
@@ -203,12 +207,7 @@ TableViewCell* LySelectPlayer::tableCellAtIndex(cocos2d::extension::TableView *t
         // Init your cell here...
         cell = new (std::nothrow) TreasureCell();
         cell->autorelease();
-        TreasureInfo ti;
-        ti.Type = TREASURE_CALABASH;
-        ti.IconName = "texture/playertest.png";
-        ti.Name = "宝葫芦";
-        ti.lv = idx;
-        ti.Desc = "能吸收更远的魂\n范围大概50吧";
+        TreasureInfo ti = DataAdapter::getInstance()->v_treasureList.at(idx);
         cell->setTreasureInfo(ti);
     } else {
         // refresh your cell here...
@@ -218,7 +217,7 @@ TableViewCell* LySelectPlayer::tableCellAtIndex(cocos2d::extension::TableView *t
 
 ssize_t LySelectPlayer::numberOfCellsInTableView(cocos2d::extension::TableView *table)
 {
-    return 2;
+    return DataAdapter::getInstance()->v_treasureList.size();
 }
 /* Scroll view end */
 
@@ -255,9 +254,9 @@ void LySelectPlayer::switchPlayer(int idxOff)
         }
         
         if (idxOff > 0) {
-            playAnime("switchLeft", callfunc_selector(LySelectPlayer::aniCall_PlayerShoot));
+            playAnime("switchLeft");
         } else {
-            playAnime("switchRight", callfunc_selector(LySelectPlayer::aniCall_PlayerShoot));
+            playAnime("switchRight");
         }
         this->runAction(Sequence::create(DelayTime::create(0.2),
                                          CallFunc::create([=](){m_player->shoot(true);}),
@@ -285,18 +284,13 @@ void LySelectPlayer::protectIdx()
     }
 }
 
-void LySelectPlayer::aniCall_PlayerShoot()
-{
-    
-}
-
 // For touch zone
 bool LySelectPlayer::zoneTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
 {
     if (!m_isSelectingPlayer) return false;
     
     Vec2 pt = touch->getLocation();
-    
+    pt = this->convertToNodeSpace(pt);
     if (m_touchZoneRect.containsPoint(pt)) {
         return true;
     } else {
@@ -383,11 +377,6 @@ void TreasureCell::setTreasureInfo(TreasureInfo ti)
     }
     
 }
-
-//void TreasureCell::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
-//{
-//    TableViewCell::draw(renderer, transform, flags);
-//}
 
 bool TreasureCell::select()
 {

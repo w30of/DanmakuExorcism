@@ -30,7 +30,7 @@ public:
     void setVelocityOffset(float vOff){ m_bltInfo.vOff = vOff; };
     void setVelocityOffsetEx(float vOffEx){ m_bltInfo.vExOff = vOffEx; };
     void setVelocityLimit(float vLimit){ m_bltInfo.vLimit = vLimit; };
-    void setAngle(float a){ m_bltInfo.a = a; };
+    void setAngle(float a);
     void setAngleOffset(float aOff){ m_bltInfo.aOff = aOff; };
     void setAngleOffsetEx(float aOffEx){ m_bltInfo.aExOff = aOffEx; };
     void setAngleLimit(float aLimit){ m_bltInfo.aLimit = aLimit; };

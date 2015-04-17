@@ -36,7 +36,7 @@ void GamingLayer::prepare()
     GameLogic::getInstance()->gLayer = this;
     
 // preset layer status
-    this->setContentSize(Size(640, 960));
+    this->setContentSize(Director::getInstance()->getVisibleSize());
     this->setAnchorPoint(Point::ZERO);
     m_WinSize = this->getContentSize();
     GameLogic::getInstance()->winSize = m_WinSize;
@@ -91,6 +91,34 @@ void GamingLayer::setPlayerType(PlayerType type)
     }
 }
 
+void GamingLayer::showLogo(int stageID)
+{
+    if (stageID == 1) {
+        Sprite* sprLogo = Sprite::create("logo_stage1.png");
+        this->addChild(sprLogo, 999, 999);
+        Size contentSize = this->getContentSize();
+        sprLogo->setPosition(contentSize.width/2, contentSize.height/2);
+        
+//        auto fileUtiles = FileUtils::getInstance();
+//        auto fragmentFullPath = fileUtiles->fullPathForFilename("example_Blur.fsh");
+//        auto fragSource = fileUtiles->getStringFromFile(fragmentFullPath);
+//        auto glprogram = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragSource.c_str());
+//        GLProgramState* _glprogramstate = GLProgramState::getOrCreateWithGLProgram(glprogram);
+//        _glprogramstate->retain();
+//        _glprogramstate->setUniformVec2("resolution", sprLogo->getTexture()->getContentSizeInPixels());
+//        _glprogramstate->setUniformFloat("blurRadius", 5.0f);
+//        _glprogramstate->setUniformFloat("sampleNum", 5.0f);
+//        sprLogo->setGLProgram(glprogram);
+        
+        sprLogo->setOpacity(0);
+        sprLogo->runAction(Sequence::create(FadeIn::create(1),
+                                            DelayTime::create(1),
+                                            FadeOut::create(1),
+                                            CallFunc::create([=](){sprLogo->removeFromParent();}),
+                                            NULL));
+    }
+}
+
 void GamingLayer::update(float dt)
 {
     // show the label of time
@@ -125,6 +153,7 @@ void GamingLayer::onTouchEnded(Touch* touch, Event  *event)
 {
     if (!_player) return;
     _player->shoot(false);
+    _player->idle();
 }
 
 

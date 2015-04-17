@@ -23,11 +23,15 @@ bool GamingScene::init()
 
 void GamingScene::GamePreparing()
 {
+    // 1. Init layer manager
     this->addChild(LayerManager::getInstance());
+    
+    // 2. Prepare data stream
+    DataAdapter::getInstance()->init();
     DataAdapter::getInstance()->LoadStageList();
     DataAdapter::getInstance()->LoadEnemyList(1);
-//    GamingLayer* layer = GamingLayer::create();
     
+    // 3. Show game
     LayerManager::getInstance()->pushLayer(CCB_LY_HOME);
 }
 

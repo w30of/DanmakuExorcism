@@ -11,6 +11,7 @@
 
 #include "BulletGenerator.h"
 #include "DanmakuPool.h"
+#include "Protocol.h"
 USING_NS_CC;
 
 typedef enum
@@ -35,6 +36,7 @@ public:
     void setContainerSize(Size s);
     void shoot(bool isShoot);
     void move(Touch* touch);
+    void idle();
     
 protected:
     Player();
@@ -43,6 +45,7 @@ protected:
 private:
     void initialize();
     void updateBullets(float dt);
+    void moveAnimate(Direction dir);
     
     PlayerType _playerType;
     CC_SYNTHESIZE(int, _HP, HP);
@@ -50,6 +53,9 @@ private:
     Size _containerSize;
     bool _isShoot;
     bool _hasInit;
+    Animation* _aniIdle;
+    Animation* _aniSide;
+    Direction _dir;
 };
 
 #endif /* defined(__DanmakuExorcism__Player__) */

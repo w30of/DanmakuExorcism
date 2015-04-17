@@ -7,6 +7,8 @@
 //
 
 #include "DataAdapter.h"
+#include "json/writer.h"
+#include "json/stringbuffer.h"
 
 static DataAdapter *s_dataApapter = nullptr;
 
@@ -21,11 +23,59 @@ DataAdapter* DataAdapter::getInstance()
 
 DataAdapter::DataAdapter()
 {
-    
+    playingStageID = 1;
+    logoShowTime = 0;
+    logoHasShown = false;
 }
 
 DataAdapter::~DataAdapter()
 {
+    
+}
+
+void DataAdapter::init()
+{
+    // Init treasures info
+    auto path = FileUtils::getInstance()->getWritablePath();
+    path.append(FILE_TREASURE_INFO);
+    if (!FileUtils::getInstance()->isFileExist(path))
+    {
+        // Init with treasure info template
+        Data tData = FileUtils::getInstance()->getDataFromFile("Script/tis.w3t");
+        
+        FILE* file = fopen(path.c_str(), "wb");
+        if (file)
+        {
+            fputs((const char*)tData.getBytes(), file);
+            fclose(file);
+        }
+        tData.clear();
+    }
+    if (FileUtils::getInstance()->isFileExist(path)) {
+        rapidjson::Document _doc;
+        Data tiData = FileUtils::getInstance()->getDataFromFile(path);
+        
+        _doc.Parse<0>((const char*)tiData.getBytes());
+        rapidjson::Value &tArr = _doc["treasures"];
+        
+        v_treasureList.clear();
+        
+        for (rapidjson::SizeType i = 0; i < tArr.Size(); ++i) {
+            const rapidjson::Value &pObj = tArr[i];
+            TreasureInfo ti;
+            ti.Type = (TreasureType)pObj["type"].GetInt();
+            ti.IconName = pObj["icon"].GetString();
+            ti.Name = pObj["name"].GetString();
+            ti.lv = pObj["lv"].GetInt();
+            ti.Desc = pObj["desc"].GetString();
+            
+            v_treasureList.push_back(ti);
+        }
+        
+        tiData.clear();
+    } else {
+        log("Error: Treasure info file does not exist");
+    }
     
 }
 
@@ -35,7 +85,7 @@ bool DataAdapter::LoadStageList()
     ssize_t size = 0;
     unsigned char *pBytes = nullptr;
     
-    pBytes =  cocos2d::CCFileUtils::getInstance()->getFileData(FILE_STAGE_LIST, "r", &size);
+    pBytes = cocos2d::CCFileUtils::getInstance()->getFileData(FILE_STAGE_LIST, "r", &size);
     if (pBytes == nullptr || strcmp((char*)pBytes, "") == 0) {
         log("\n\n---- File %s Read Error! ----\n", FILE_STAGE_LIST);
         return nullptr;
@@ -103,6 +153,8 @@ bool DataAdapter::LoadStageList()
 
 bool DataAdapter::LoadEnemyList(int stageID)
 {
+    this->playingStageID = stageID;
+    
     std::string stageFileName;
     for (int i = 0; i < v_stageList.size(); ++i)
     {
@@ -117,18 +169,17 @@ bool DataAdapter::LoadEnemyList(int stageID)
     }
     
     rapidjson::Document _doc;
-    ssize_t size = 0;
     unsigned char *pBytes = nullptr;
     
-    pBytes =  cocos2d::CCFileUtils::getInstance()->getFileData(String::createWithFormat("%s", stageFileName.c_str())->getCString(), "r", &size);
+    Data data = FileUtils::getInstance()->getDataFromFile(stageFileName);
+    pBytes = data.getBytes();
     if (pBytes == nullptr || strcmp((char*)pBytes, "") == 0) {
         log("\n\n---- LoadEnemyList File %s Read Error! ----\n", String::createWithFormat("%s", stageFileName.c_str())->getCString());
         return nullptr;
     }
     
-    std::string load_str((const char*)pBytes, size);
+    std::string load_str((const char*)pBytes, data.getSize());
     log("%s", pBytes);
-    CC_SAFE_DELETE_ARRAY(pBytes);
     _doc.Parse<0>(load_str.c_str());
     
 
@@ -150,6 +201,9 @@ bool DataAdapter::LoadEnemyList(int stageID)
         return false;
     }
     
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    
+    std::vector<EnemyInfo> v_tmpEnemyInfoList;
     for (rapidjson::SizeType i = 0; i < jsonArr.Size(); i++)
     {
         const rapidjson::Value &p = jsonArr[i];
@@ -193,21 +247,41 @@ bool DataAdapter::LoadEnemyList(int stageID)
                 enemyInfo.ShowCount = showcount.GetInt();
                 enemyInfo.ShowInterval = showitv.GetDouble();
                 std::vector<std::string> vPos = split(showpos.GetString(), ",");
-                enemyInfo.ShowPos = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
+                float x = atof(vPos.at(0).c_str());
+                if (x < 1) {
+                    x = visibleSize.width * x;
+                }
+                float y = atof(vPos.at(1).c_str());
+                if (y < 1) {
+                    y = visibleSize.height * y;
+                }
+                enemyInfo.ShowPos = Vec2(floorf(x), floorf(y));
                 vPos = split(showposoff.GetString(), ",");
                 enemyInfo.ShowPosOff = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
                 enemyInfo.CustomScript = customscript.GetString();
                 
-                this->v_EnemyInfoList.push_back(enemyInfo);
+                v_tmpEnemyInfoList.push_back(enemyInfo);
                 log("enemy ID : %d", enemyInfo.EnemyID);
             }
         }
+        else if (p.HasMember("stagelogo"))
+        {
+            const rapidjson::Value &valueEnt = p["stagelogo"];
+            const rapidjson::Value &showtime = valueEnt["showtime"];
+            logoShowTime = showtime.GetDouble();
+            logoHasShown = false;
+        }
     }
     
-    std::sort(v_EnemyInfoList.begin(), v_EnemyInfoList.end(), [](const EnemyInfo ef1,const EnemyInfo ef2){return true;});
+    for (int i = (int)v_tmpEnemyInfoList.size() - 1; i >= 0; --i) {
+        v_EnemyInfoList.push_back(v_tmpEnemyInfoList.at(i));
+    }
+    
+//    std::sort(v_EnemyInfoList.begin(), v_EnemyInfoList.end(), [](const EnemyInfo ef1,const EnemyInfo ef2){return true;});
     
     log("\n\n---- Load enemy info successful! ----\n");
     
+    data.clear();
     return true;
 }
 

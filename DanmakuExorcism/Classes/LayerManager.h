@@ -29,12 +29,14 @@ public:
     // funcs...
     Node* getCCB(CCBClassType classType, Ref* pOwner = nullptr);
     // show layer
-    void pushLayer(Node*);
+    void pushLayer(Node* pNode, bool shouldResetPos = true);
     Node* pushLayer(CCBClassType classType);
     // close layer
     void closeLayer(int num = 1);
     void closeLayer(Node*);
     void closeAll();
+    
+    Vec2 originOffset;
     
 private:
     LayerManager();
