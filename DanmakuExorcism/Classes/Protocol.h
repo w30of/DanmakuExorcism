@@ -70,18 +70,18 @@ typedef enum
     DANMAKU_ENEMY_1_6   = 6,
     DANMAKU_ENEMY_1_7   = 7,
     DANMAKU_ENEMY_1_8   = 8,
+    DANMAKU_ENEMY_1_9   = 9,
+    DANMAKU_ENEMY_1_11  = 11,
+    DANMAKU_ENEMY_1_12  = 12,
+    DANMAKU_ENEMY_1_13  = 13
 }DanmakuType;
 
 typedef enum
 {
-    ENEMY_1_1     = 0,
-    ENEMY_1_2     = 1,
-    ENEMY_1_3     = 2,
-    ENEMY_1_4     = 3,
-    ENEMY_1_5     = 4,
-    ENEMY_1_6     = 5,
-    ENEMY_1_7     = 6,
-    ENEMY_1_8     = 7,
+    ENEMY_1_1 = 1,
+    ENEMY_1_2 = 2,
+    ENEMY_1_3 = 3,
+    ENEMY_1_4_BOSS = 13
 }EnemyType;
 
 typedef enum
@@ -140,10 +140,13 @@ struct EnemyInfo
     DanmakuType DmkID;          // For create danmaku
     
     float ShowTime;             // Timing of the appearance
-    int ShowCount;              // Count of this enemy
+    int ShowCount;              // Count of this enemy, start at 0
+    int MaxShowCount;           // Max count of this enemy
     float ShowInterval;         // Interval of the appearance
     Vec2 ShowPos;               // Position of the appearance
     Vec2 ShowPosOff;            // Position offset of the appearance
+    Vec2 InitPos;               // Position of the preset
+    Vec2 InitPosOff;            // Position offset of the preset
     
     // w3 script
     std::string CustomScript;

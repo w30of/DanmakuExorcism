@@ -11,6 +11,7 @@
 		0F1520B91A6D348500963630 /* enemy_bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B51A6D348500963630 /* enemy_bullet.png */; };
 		0F1520BA1A6D348500963630 /* enemy_bullet_blue_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */; };
 		0F1520BB1A6D348500963630 /* enemy_bullet_red_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */; };
+		0F4CD8011B160EED00117267 /* blade.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F4CD8001B160EED00117267 /* blade.png */; };
 		0F4E33F81AD54F4800EF67BE /* example_Blur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0F4E33F71AD54F4800EF67BE /* example_Blur.fsh */; };
 		0F509B951A59863100CCE1BD /* LyHome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F509B931A59863100CCE1BD /* LyHome.cpp */; };
 		0F51BCFA1A7E684700DF98FD /* daoshi_mian.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F51BCF91A7E684700DF98FD /* daoshi_mian.png */; };
@@ -118,6 +119,7 @@
 		0F1520B51A6D348500963630 /* enemy_bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet.png; sourceTree = "<group>"; };
 		0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_blue_1.png; sourceTree = "<group>"; };
 		0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_bullet_red_1.png; sourceTree = "<group>"; };
+		0F4CD8001B160EED00117267 /* blade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blade.png; sourceTree = "<group>"; };
 		0F4E33F71AD54F4800EF67BE /* example_Blur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = example_Blur.fsh; sourceTree = "<group>"; };
 		0F509B921A59860100CCE1BD /* CCBLayerLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCBLayerLoader.h; sourceTree = "<group>"; };
 		0F509B931A59863100CCE1BD /* LyHome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LyHome.cpp; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				0F1520B51A6D348500963630 /* enemy_bullet.png */,
 				0F1520B61A6D348500963630 /* enemy_bullet_blue_1.png */,
 				0F1520B71A6D348500963630 /* enemy_bullet_red_1.png */,
+				0F4CD8001B160EED00117267 /* blade.png */,
 			);
 			path = bullets;
 			sourceTree = "<group>";
@@ -526,7 +529,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 2XXWDRLQ87;
+						DevelopmentTeam = ML29VF2D5H;
 					};
 				};
 			};
@@ -598,6 +601,7 @@
 				0F4E33F81AD54F4800EF67BE /* example_Blur.fsh in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				0F4CD8011B160EED00117267 /* blade.png in Resources */,
 				0F040C651A5AD0AA00C3339D /* ccbres in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				0FBF62041A9343ED00164C46 /* ccb in Resources */,
@@ -679,6 +683,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -696,8 +701,9 @@
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wanty.dmke;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -713,6 +719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -728,8 +735,9 @@
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wanty.dmke;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

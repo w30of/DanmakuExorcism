@@ -59,12 +59,12 @@ Node* LayerManager::getCCB(CCBClassType classType, Ref* pOwner /* = nullptr */)
     switch (classType) {
         case CCB_LY_HOME:{
             ccNodeLoaderLibrary->registerNodeLoader("LyHome", LyHomeLoader::loader());
-            strCCBFileName = "lyHome.ccbi";
+            strCCBFileName = "ccb/lyHome.ccbi";
         }
             break;
         case CCB_LY_SELECT_PLAYER:{
             ccNodeLoaderLibrary->registerNodeLoader("LySelectPlayer", LySelectPlayerLoader::loader());
-            strCCBFileName = "lySelectPlayer.ccbi";
+            strCCBFileName = "ccb/lySelectPlayer.ccbi";
         }
             break;
         default:

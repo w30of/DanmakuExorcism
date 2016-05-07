@@ -9,6 +9,8 @@
 #include "Danmaku.h"
 #include "GameLogic.h"
 
+using namespace std;
+
 Danmaku::Danmaku()
 : _pOwner(nullptr)
 , _danmakuType(DANMAKU_NONE)
@@ -68,46 +70,60 @@ void Danmaku::showDanmaku()
     if (_danmakuType == DANMAKU_ENEMY_1_1)
     {
         schedule(schedule_selector(Danmaku::danmaku_1_1), _interval, _count, 0);
-        
     }
     else if (_danmakuType == DANMAKU_ENEMY_1_3)
     {
         schedule(schedule_selector(Danmaku::danmaku_1_3), _interval, _count, 0);
     }
-    else if (_danmakuType == DANMAKU_ENEMY_1_4 || _danmakuType == DANMAKU_ENEMY_1_5)
+    else if (_danmakuType == DANMAKU_ENEMY_1_4)
+    {
+        schedule(schedule_selector(Danmaku::danmaku_1_4), _interval, _count, 0);
+    }
+    else if (_danmakuType == DANMAKU_ENEMY_1_5)
+    {
+        schedule(schedule_selector(Danmaku::danmaku_1_5), _interval, _count, 0);
+    }
+    else if (_danmakuType == DANMAKU_ENEMY_1_6)
+    {
+        schedule(schedule_selector(Danmaku::danmaku_1_6), _interval, _count, 0);
+    }
+    else if (_danmakuType == DANMAKU_ENEMY_1_7 || _danmakuType == DANMAKU_ENEMY_1_8)
     {
         if (_schOffset < 1) {
-            schedule(schedule_selector(Danmaku::danmaku_1_4), _interval, _count, 0);
+            schedule(schedule_selector(Danmaku::danmaku_1_7), _interval, _count, 0);
         } else {
             int startAngle;
-            if (_danmakuType == DANMAKU_ENEMY_1_4) {
+            if (_danmakuType == DANMAKU_ENEMY_1_8) {
                 startAngle = 100;
             } else {
                 startAngle = -80;
             }
-            for (int i = 0; i < 9; ++i) {
+            for (int i = 0; i < 9; ++i) {   
                 GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, _pOwner->getPosition(), 200, startAngle+i*20);
             }
         }
-        _schOffset = 1;
     }
-    else if (_danmakuType == DANMAKU_ENEMY_1_6)
+    else if (_danmakuType == DANMAKU_ENEMY_1_9)
     {
-        Vec2 pos = _pOwner->getPosition();
-        float agl = GameLogic::getAngleToPlayer(pos);
-        for (int i = 0; i < 3; ++i) {
-            GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, Vec2(pos.x + (-20 + i*20), pos.y), 200+ 30*i, agl + (-10 + i*10));
-        }
+        schedule(schedule_selector(Danmaku::danmaku_1_9), _interval, _count, 0);
     }
-    else if (_danmakuType == DANMAKU_ENEMY_1_7)
+    else if (_danmakuType == DANMAKU_ENEMY_1_11)
     {
-        schedule(schedule_selector(Danmaku::danmaku_1_7), _interval, _count, 0);
+        schedule(schedule_selector(Danmaku::danmaku_1_11), _interval, _count, 0);
     }
-    else if (_danmakuType == DANMAKU_ENEMY_1_8)
+    else if (_danmakuType == DANMAKU_ENEMY_1_12)
     {
-        schedule(schedule_selector(Danmaku::danmaku_1_8), _interval, _count, 0);
+        schedule(schedule_selector(Danmaku::danmaku_1_12), _interval, _count, 0);
     }
-    
+    else if (_danmakuType == DANMAKU_ENEMY_1_13)
+    {
+        danmaku_1_13(0);
+        this->runAction(Sequence::create(DelayTime::create(2),
+                                         CallFunc::create([=]{
+            schedule(schedule_selector(Danmaku::danmaku_1_13), _interval, _count, 0);
+        }),
+                                         NULL));
+    }
 }
 
 void Danmaku::stop()
@@ -150,11 +166,12 @@ void Danmaku::danmaku_1_3(float dt)
     Vec2 startPos = _pOwner->getPosition();
     // Create bullets...
     for (int i = 0; i < 3; ++i) {
-        Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600, _schOffset*17+i*120, 10, 0, -50);
+        Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600, _schOffset*17+i*120, 0.01, 0, -50);
         blt->setShouldRotate(false);
         std::function<void()> funcChangeV = [=](){
             blt->setVelocityLimit(400);
-            blt->setVelocityOffset(20); };
+            blt->setVelocityOffset(20);
+        };
         blt->runAction(Sequence::create(DelayTime::create(1),
                                         CallFunc::create(funcChangeV),
                                         NULL));
@@ -168,48 +185,144 @@ void Danmaku::danmaku_1_4(float dt)
     Vec2 startPos = _pOwner->getPosition();
     float angle = GameLogic::getAngleToPlayer(startPos);
     // Create bullets...
-    GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 400, angle);
+    for (int i = 0; i < 5; ++i) {
+        GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600+i*80, angle, 300, 0, -20);
+    }
+}
+void Danmaku::danmaku_1_5(float dt)
+{
+    //Prepare...
+    Vec2 startPos = _pOwner->getPosition();
+    float angle = GameLogic::getAngleToPlayer(startPos);
+    // Create bullets...
+    for (int i = 0; i < 3; ++i) {
+        Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 800, angle+20*(i-1), 100, 0, -120);
+        blt->runAction(Sequence::create(DelayTime::create(1),
+                                        CallFunc::create([=](){
+                                                                 blt->setVelocityOffset(10);
+                                                                 blt->setVelocityLimit(300);
+                                                              }),
+                                        NULL));
+    }
+}
+
+void Danmaku::danmaku_1_6(float dt)
+{
+    // Prepare...
+    Vec2 startPos = _pOwner->getPosition();
+    float angle = -70;
+    // Shoot...
+    int count = 7;
+    for (int i = 0; i < count; ++i) {
+        GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 250, (angle - count/2*15)+i*15);
+    }
+    
+    ++_schOffset;
 }
 
 void Danmaku::danmaku_1_7(float dt)
 {
-    // Prepare,,,
+    // Prepare...
     Vec2 startPos = _pOwner->getPosition();
     float angle = GameLogic::getAngleToPlayer(startPos);
     // Shoot...
-    float count = 10;
-    if (_schOffset%2 == 0) {
-        count = 9;
-    }
-
-    for (int i = 0; i < count; ++i) {
-        GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 250+30*_schOffset, (angle - count/2*15)+i*15);
-    }
-    _schOffset++;
+    GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 420-40*_schOffset, angle);
+    ++_schOffset;
 }
 
-void Danmaku::danmaku_1_8(float dt)
-{
+//void Danmaku::danmaku_1_8(float dt)
+//{
+//    // Prepare...
+//    Vec2 startPos = _pOwner->getPosition();
+//    float agl = GameLogic::getAngleToPlayer(startPos) + random(-10, 10);
+//    // Shoot...
+//    /* Fission bullet example */
+//    
+//    ++_schOffset;
+//}
+
+void Danmaku::danmaku_1_9(float dt) {
     // Prepare...
     Vec2 startPos = _pOwner->getPosition();
-    float agl = GameLogic::getAngleToPlayer(startPos);
+    float agl = GameLogic::getAngleToPlayer(startPos) + random(-20, 20);
     // Shoot...
-    for (int i = 0; i < _schOffset + 1; ++i) {
-        Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600, (agl - _schOffset/2*15) + i*15, 2, 0, -40);
-        blt->runAction(Sequence::create(DelayTime::create(1),
-                                        CallFunc::create([=]()
-                                                         {
-                                                             BulletInfo bi = blt->getBulletInfo();
-                                                             blt->setAngle(bi.a+13);
-                                                             blt->setVelocityLimit(300);
-                                                             blt->setVelocityOffset(50);
-                                                             GameLogic::setBullet(ENEMY_BULLET, bi.BulletID, blt->getPosition(), 2, bi.a-13, 300, 0, 50);
-                                                         }),
-                                        NULL));
+    Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600, agl, 5, 0, -50);
+    blt->setShouldRotate(false);
+    blt->runAction(Sequence::create(DelayTime::create(1),
+                                    CallFunc::create([=]() {
+        BulletInfo bi = blt->getBulletInfo();
+        blt->setAngle(bi.a+17);
+        blt->setVelocity(600);
+        blt->setVelocityLimit(200);
+        blt->setVelocityOffset(80);
+        blt->updateRotate(true);
+        GameLogic::setBullet(ENEMY_BULLET, bi.BulletID, blt->getPosition(), 600, bi.a-17, 300, 0, 80);
+    }),
+    NULL));
+}
+
+void Danmaku::danmaku_1_11(float dt) {
+    // Prepare...
+    Vec2 startPos = _pOwner->getPosition();
+    float angle = -110;
+    // Shoot...
+    int count = 7;
+    for (int i = 0; i < count; ++i) {
+        GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 250, (angle - count/2*15)+i*15);
+    }
+    
+    ++_schOffset;
+}
+
+void Danmaku::danmaku_1_12(float dt) {
+    // Prepare...
+    Vec2 startPos = _pOwner->getPosition();
+    // Shoot...
+    for (int i = 0; i < 12; ++i) {
+        Bullet* blt = GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, startPos, 600, i*30+_schOffset*13, 200, 0, -50);
+        blt->setShouldRotate(false);
     }
     ++_schOffset;
 }
 
+void Danmaku::danmaku_1_13(float dt)
+{
+    Sprite* spBlade = Sprite::create("blade.png");
+    spBlade->setOpacity(0);
+    GameLogic::getInstance()->gLayer->addChild(spBlade,999);
+    spBlade->setPosition(_pOwner->getPosition() + Vec2(0, -100));
+    spBlade->runAction(Sequence::create(FadeTo::create(0.1f, 255),
+                                        DelayTime::create(0.4f),
+                                        FadeTo::create(2, 0),
+                                        CallFunc::create([=](){  spBlade->removeFromParent();  }),
+                                        NULL));
+    vector<Vec2> v_points;
+    int off = _schOffset%2 == 0 ? 1 : -1;
+    if (off < 0) spBlade->setScaleX(-1);
+    v_points.push_back(Vec2(off*-149,147));
+    v_points.push_back(Vec2(off*-133,90));
+    v_points.push_back(Vec2(off*-113,43));
+    v_points.push_back(Vec2(off*-88,4));
+    v_points.push_back(Vec2(off*-52,-35));
+    v_points.push_back(Vec2(off*-4,-74));
+    v_points.push_back(Vec2(off*45,-107));
+    v_points.push_back(Vec2(off*93,-130));
+    v_points.push_back(Vec2(off*142,-146));
+    
+    int count = 30;
+    size_t len = v_points.size();
+    for (size_t i = 0; i < len; ++i) {
+        Vec2 pos = v_points.at(i);
+        for (int j = 0; j < count; ++j) {
+            this->runAction(Sequence::create(DelayTime::create(0.03f*i),
+                                             CallFunc::create([=](){
+                GameLogic::setBullet(ENEMY_BULLET, BULLET_ENEMY_RED_1, pos + spBlade->getPosition(), 800, 360/count*j, 200+i*15, 0, -80);
+            }),
+                                             NULL));
+        }
+    }
+    ++_schOffset;
+}
 
 
 

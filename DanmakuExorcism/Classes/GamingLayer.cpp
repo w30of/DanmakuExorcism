@@ -61,14 +61,14 @@ void GamingLayer::prepare()
     lbTime->setPosition(m_WinSize.width - 60, m_WinSize.height - 30);
     
     // background
-    auto sprBg1 = Sprite::create("background.png");
+    auto sprBg1 = Sprite::create("texture/background.png");
     sprBg1->setAnchorPoint(Point::ZERO);
     sprBg1->setPosition(Point::ZERO);
     sprBg1->setScale(2);
     sprBg1->setTag(7);
     this->addChild(sprBg1);
     
-    auto sprBg2 = Sprite::create("background.png");
+    auto sprBg2 = Sprite::create("texture/background.png");
     sprBg2->setAnchorPoint(Point::ZERO);
     sprBg2->setPosition(0, m_WinSize.height);
     sprBg2->setScale(2);

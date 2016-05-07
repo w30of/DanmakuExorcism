@@ -45,16 +45,46 @@ void Enemy::setEnemyInfo(EnemyInfo info)
     m_enemyInfo = info;
     // Init texture
     setSprite();
+    // Show danmaku of enemy
+    setDanmaku();
     // Enemy behavior hard code
     setEnemyBehavior();
     DanmakuPool::getInstance()->push(this);
-    // Show danmaku of enemy
-    setDanmaku();
 }
 
 EnemyInfo Enemy::getEnemyInfo()
 {
     return m_enemyInfo;
+}
+
+void Enemy::shoot()
+{
+    this->m_danmaku->run();
+}
+
+void Enemy::stopShoot()
+{
+    m_danmaku->stop();
+}
+
+Vec2 Enemy::getShowPos()
+{
+    return m_enemyInfo.ShowPos;
+}
+
+Rect Enemy::getEnemyRect(bool isHalf /*= false*/)
+{
+    if (isHalf) {
+        return Rect(this->getPosition().x - m_enemySize.width/3,
+                    this->getPosition().y - m_enemySize.height/3,
+                    m_enemySize.width/1.5f,
+                    m_enemySize.height/1.5f);
+    } else {
+        return Rect(this->getPosition().x - m_enemySize.width/2,
+                    this->getPosition().y - m_enemySize.height/2,
+                    m_enemySize.width,
+                    m_enemySize.height);
+    }
 }
 
 void Enemy::setDanmaku()
@@ -68,6 +98,13 @@ void Enemy::setDanmaku()
 void Enemy::die()
 {
     m_danmaku->stop();
+    DanmakuPool::getInstance()->eraseEnemy(this);
+    this->removeFromParent();
+}
+
+void Enemy::disappear()
+{
+    this->removeFromParent();
 }
 
 
@@ -77,10 +114,26 @@ void Enemy::setSprite()
     // Set texture
     TextureType txrType = m_enemyInfo.TxrID;
     if (txrType == TXR_BLUE_SOUL) {
-        _sp = Sprite::create("playertest.png");
+        _sp = Sprite::create("texture/playertest.png");
     }
     this->addChild(_sp, 0);
     this->setContentSize(_sp->getContentSize());
+    m_enemySize = Size(_sp->getContentSize().width + 10, _sp->getContentSize().height + 10);
+}
+
+void Enemy::removeFromPool()
+{
+    
+}
+
+void Enemy::runW3ScriptActions(std::string w3s)
+{
+    Vector<Sequence*> v_seqs = GameLogic::getInstance()->getW3Actions(w3s, this);
+    size_t len = v_seqs.size();
+    for (int i = 0; i < len; ++i) {
+        Sequence* seq = v_seqs.at(i);
+        this->runAction(seq);
+     }
 }
 
 void Enemy::setEnemyBehavior()
@@ -88,14 +141,16 @@ void Enemy::setEnemyBehavior()
     // These will help you...
     Size contentSize = this->getContentSize();
     Size winSize = GameLogic::getInstance()->winSize;
-    Action *shoot = CallFunc::create([=](){  this->m_danmaku->run();  });
-    Action *remove = CallFunc::create([=](){  this->removeFromParent();  });
+    Action *shoot = CallFunc::create([=](){  this->shoot();  });
+    Action *remove = CallFunc::create([=](){  this->die();  });
     
-    // Now, enemy will trying tu kill you...
+    // Now, enemy will trying to kill you...
     /* Stage 1: initShot */
     if (m_enemyInfo.EnemyID == ENEMY_1_1 || m_enemyInfo.EnemyID == ENEMY_1_2)
     {
-        // Prepare...
+//        this->setPosition(m_enemyInfo.InitPos);
+//        this->runW3ScriptActions(m_enemyInfo.CustomScript);
+//        // Prepare...
         Vec2 startPos;
         if (m_enemyInfo.EnemyID == ENEMY_1_1) {
             startPos = Vec2(winSize.width + contentSize.width, winSize.height * 0.875);
@@ -142,100 +197,31 @@ void Enemy::setEnemyBehavior()
                                          remove,
                                          NULL));
     }
-    else if (m_enemyInfo.EnemyID == ENEMY_1_4 || m_enemyInfo.EnemyID == ENEMY_1_5)
-    {
+    else if (m_enemyInfo.EnemyID == ENEMY_1_4_BOSS) {
         // Prepare...
-        Vec2 startPos;
-        Vec2 endPos;
-        Vec2 endPos1;
-        ccBezierConfig bc;
-        if (m_enemyInfo.EnemyID == ENEMY_1_4) {
-            startPos = Vec2(winSize.width + contentSize.width, m_enemyInfo.ShowPos.y);
-            endPos = Vec2(winSize.width - contentSize.width/2, m_enemyInfo.ShowPos.y - 150);
-            endPos1 = Vec2(winSize.width + contentSize.width, m_enemyInfo.ShowPos.y - 150);
-            
-            Vec2 offset = Vec2(winSize.width - m_enemyInfo.ShowPos.x, startPos.y - endPos.y);
-            bc.controlPoint_1 = Vec2(m_enemyInfo.ShowPos.x, endPos.y + offset.y/2);
-            bc.controlPoint_2 = Vec2(winSize.width - offset.x/2, endPos.y);
-            bc.endPosition = endPos;
-        } else {
-            startPos = Vec2(-contentSize.width, m_enemyInfo.ShowPos.y);
-            endPos = Vec2(contentSize.width/2, m_enemyInfo.ShowPos.y - 150);
-            endPos1 = Vec2(-contentSize.width, m_enemyInfo.ShowPos.y - 150);
-            
-            Vec2 offset = Vec2(m_enemyInfo.ShowPos.x, startPos.y - endPos.y);
-            bc.controlPoint_1 = Vec2(m_enemyInfo.ShowPos.x, endPos.y + offset.y/2);
-            bc.controlPoint_2 = Vec2(offset.x/2, endPos.y);
-            bc.endPosition = endPos;
-        }
+        // Kill all enemies!
+        DanmakuPool::getInstance()->clearOneThing(ENEMY, true);
+        DanmakuPool::getInstance()->clearOneThing(ENEMY_BULLET, true);
         
         
-        
-        
-        this->setPosition(startPos);
-        // Show...
-        this->runAction(Sequence::create(DelayTime::create(0.1),
-                                         shoot,
-                                         EaseSineOut::create(MoveTo::create(1, m_enemyInfo.ShowPos)),
-                                         DelayTime::create(0.3),
-                                         EaseExponentialIn::create(BezierTo::create(1.8, bc)),
-                                         CallFunc::create([=](){  this->m_danmaku->run();  }),
-                                         MoveTo::create(0.2, endPos1),
-                                         remove,
+        this->setPosition(m_enemyInfo.InitPos);
+        this->setVisible(false);
+        this->shoot();
+        this->runAction(Sequence::create(DelayTime::create(3),
+                                         Show::create(),
                                          NULL));
     }
-    else if (m_enemyInfo.EnemyID == ENEMY_1_6)
+    else
     {
-        // Prepare...
-        Vec2 startPos = Vec2(winSize.width + contentSize.width, winSize.height / 2);
-        this->setPosition(startPos);
-        ccBezierConfig bc;
-        bc.endPosition = Vec2(-contentSize.width/2, m_enemyInfo.ShowPos.y);
-        bc.controlPoint_1 = Vec2(startPos.x, (startPos.y + bc.endPosition.y)/2);
-        bc.controlPoint_2 = Vec2(winSize.width / 2, bc.endPosition.y);
-        
-        // Show...
-        this->runAction(Sequence::create(Spawn::create(BezierTo::create(2, bc),
-                                                       Sequence::create(DelayTime::create(2-m_enemyInfo.ShowCount*0.2),
-                                                                        shoot,
-                                                                        NULL),
-                                                       NULL),
-                                         remove,
-                                         NULL));
-    }
-    else if (m_enemyInfo.EnemyID == ENEMY_1_7)
-    {
-        // Show...
-        this->setPosition(m_enemyInfo.ShowPos);
-        this->runAction(Sequence::create(Spawn::create(MoveBy::create(3, Vec2(0, 20)),
-                                                       shoot,
-                                                       NULL),
-                                         remove,
-                                         NULL));
-    }
-    else if (m_enemyInfo.EnemyID == ENEMY_1_8)
-    {
-        // Prepare...
-        Vec2 startPos = Vec2(winSize.width * 0.6, winSize.height + contentSize.height);
-        ccBezierConfig bc;
-        bc.endPosition = Vec2(-contentSize.width, m_enemyInfo.ShowPos.y);
-        Vec2 offset = Vec2(startPos.x, startPos.y - bc.endPosition.y);
-        bc.controlPoint_1 = Vec2(startPos.x, bc.endPosition.y + offset.y/2);
-        bc.controlPoint_2 = Vec2(bc.endPosition.x + offset.x / 2, bc.endPosition.y);
-        // Show...
-        this->setPosition(startPos);
-        this->runAction(Spawn::create(EaseSineIn::create(BezierTo::create(2.6f, bc)),
-                                      Sequence::create(DelayTime::create(0.5),
-                                                       shoot,
-                                                       DelayTime::create(2.1f),
-                                                       remove,
-                                                       NULL),
-                                      NULL));
+        this->setPosition(m_enemyInfo.InitPos);
+        this->runW3ScriptActions(m_enemyInfo.CustomScript);
     }
     
     /* Stage 1: watchDog */
     /* Stage 1: dangerClose */
     /* Stage 1: BOSS */
+    
+    GameLogic::getInstance()->gLayer->addChild(this, ZORDER_ENEMY);
 }
 
 

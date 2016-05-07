@@ -24,7 +24,7 @@ public:
     bool LoadStageList();
     bool LoadEnemyList(int stageID);
     
-    std::vector<std::string> split(std::string str,std::string pattern);
+    static std::vector<std::string> split(std::string str,std::string pattern);
     
     std::vector<StageInfo> v_stageList;
     std::vector<EnemyInfo> v_EnemyInfoList;

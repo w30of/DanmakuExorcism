@@ -35,11 +35,13 @@ public:
     void setAngleOffsetEx(float aOffEx){ m_bltInfo.aExOff = aOffEx; };
     void setAngleLimit(float aLimit){ m_bltInfo.aLimit = aLimit; };
     CC_SYNTHESIZE(bool, shouldRotate, ShouldRotate);
+    void updateRotate(bool forceToDo = false);
     
     
     // enable to show and move, disable to stop and hide
     void bulletEnable();
     void bulletDisable();
+    void bulletDisappear();
     
 protected:
     Bullet();
@@ -52,14 +54,18 @@ private:
     
     // inner funcs...
     void updateV();
-    void updateRotate();
+    void checkCollide();
+    Rect getBulletRect(Vec2 pos);
     
     // property...
     BulletInfo m_bltInfo;
+    int m_collideRadius;
     Vec2 m_v; // Position offset of every frames
+    Vec2 m_lastPos;
     bool m_bInPool;
     Vec2 m_velocity;
     Sprite* m_sprite;
+    Size m_bulletSize;
     CC_SYNTHESIZE(bool, _isBulletEnable, BulletEnable);
 };
 

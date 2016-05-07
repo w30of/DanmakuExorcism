@@ -13,6 +13,7 @@
 #include "Protocol.h"
 #include "GamingLayer.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 class GameLogic
 {
@@ -48,6 +49,7 @@ public:
     
     void createEnemy(float time);
     void autoMove(Sprite* sp1, Sprite* sp2, float speed);
+    Vector<Sequence*> getW3Actions(std::string w3Script, Enemy* target);
     
 private:
     GameLogic();
@@ -55,6 +57,8 @@ private:
     
     std::vector<EnemyInfo> m_vDupEnemyInfos;
     void addEnemy(EnemyInfo ef);
+    Action* getAction(std::string w3sBlock, Enemy* target);
+    float getPosArgWithOffset(std::string w3sBlock, bool isX, int showCount);
 };
 
 #endif /* defined(__DanmakuExorcism__GameLogic__) */

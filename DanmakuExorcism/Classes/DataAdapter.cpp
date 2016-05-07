@@ -35,6 +35,7 @@ DataAdapter::~DataAdapter()
 
 void DataAdapter::init()
 {
+    return;
     // Init treasures info
     auto path = FileUtils::getInstance()->getWritablePath();
     path.append(FILE_TREASURE_INFO);
@@ -210,59 +211,53 @@ bool DataAdapter::LoadEnemyList(int stageID)
         if(p.HasMember("enemy"))
         {
             const rapidjson::Value &valueEnt = p["enemy"];
-            if (valueEnt.HasMember("enemyid") &&
-                valueEnt.HasMember("txrid") &&
-                valueEnt.HasMember("shootcount") &&
-                valueEnt.HasMember("shootdelay") &&
-                valueEnt.HasMember("shootitv") &&
-                valueEnt.HasMember("dmkid") &&
-                valueEnt.HasMember("showtime") &&
-                valueEnt.HasMember("showcount") &&
-                valueEnt.HasMember("showitv") &&
-                valueEnt.HasMember("showpos") &&
-                valueEnt.HasMember("showposoff") &&
-                valueEnt.HasMember("customscript") )
-            {
-                const rapidjson::Value &enemyid = valueEnt["enemyid"];
-                const rapidjson::Value &txrid = valueEnt["txrid"];
-                const rapidjson::Value &shootcount = valueEnt["shootcount"];
-                const rapidjson::Value &shootdelay = valueEnt["shootdelay"];
-                const rapidjson::Value &shootitv = valueEnt["shootitv"];
-                const rapidjson::Value &dmkid = valueEnt["dmkid"];
-                const rapidjson::Value &showtime = valueEnt["showtime"];
-                const rapidjson::Value &showcount = valueEnt["showcount"];
-                const rapidjson::Value &showitv = valueEnt["showitv"];
-                const rapidjson::Value &showpos = valueEnt["showpos"];
-                const rapidjson::Value &showposoff = valueEnt["showposoff"];
-                const rapidjson::Value &customscript = valueEnt["customscript"];
-                
-                EnemyInfo enemyInfo;
-                enemyInfo.EnemyID = (EnemyType)enemyid.GetInt();
-                enemyInfo.TxrID = (TextureType)txrid.GetInt();
-                enemyInfo.ShootCount = shootcount.GetInt();
-                enemyInfo.ShootDelay = shootdelay.GetDouble();
-                enemyInfo.ShootInterval = shootitv.GetDouble();
-                enemyInfo.DmkID = (DanmakuType)dmkid.GetInt();
-                enemyInfo.ShowTime = showtime.GetDouble();
-                enemyInfo.ShowCount = showcount.GetInt();
-                enemyInfo.ShowInterval = showitv.GetDouble();
-                std::vector<std::string> vPos = split(showpos.GetString(), ",");
-                float x = atof(vPos.at(0).c_str());
-                if (x < 1) {
-                    x = visibleSize.width * x;
-                }
-                float y = atof(vPos.at(1).c_str());
-                if (y < 1) {
-                    y = visibleSize.height * y;
-                }
-                enemyInfo.ShowPos = Vec2(floorf(x), floorf(y));
-                vPos = split(showposoff.GetString(), ",");
-                enemyInfo.ShowPosOff = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
-                enemyInfo.CustomScript = customscript.GetString();
-                
-                v_tmpEnemyInfoList.push_back(enemyInfo);
-                log("enemy ID : %d", enemyInfo.EnemyID);
-            }
+            
+            const rapidjson::Value &enemyid = valueEnt["enemyid"];
+            const rapidjson::Value &txrid = valueEnt["txrid"];
+            const rapidjson::Value &shootcount = valueEnt["shootcount"];
+            const rapidjson::Value &shootdelay = valueEnt["shootdelay"];
+            const rapidjson::Value &shootitv = valueEnt["shootitv"];
+            const rapidjson::Value &dmkid = valueEnt["dmkid"];
+            const rapidjson::Value &showtime = valueEnt["showtime"];
+            const rapidjson::Value &showcount = valueEnt["showcount"];
+            const rapidjson::Value &showitv = valueEnt["showitv"];
+            const rapidjson::Value &showpos = valueEnt["showpos"];
+            const rapidjson::Value &showposoff = valueEnt["showposoff"];
+            const rapidjson::Value &initpos = valueEnt["initpos"];
+            const rapidjson::Value &initposoff = valueEnt["initposoff"];
+            const rapidjson::Value &customscript = valueEnt["customscript"];
+            
+            EnemyInfo enemyInfo;
+            enemyInfo.EnemyID = (EnemyType)enemyid.GetInt();
+            enemyInfo.TxrID = (TextureType)txrid.GetInt();
+            enemyInfo.ShootCount = shootcount.GetInt();
+            enemyInfo.ShootDelay = shootdelay.GetDouble();
+            enemyInfo.ShootInterval = shootitv.GetDouble();
+            enemyInfo.DmkID = (DanmakuType)dmkid.GetInt();
+            enemyInfo.ShowTime = showtime.GetDouble();
+            enemyInfo.ShowCount = 0;
+            enemyInfo.MaxShowCount = showcount.GetInt();
+            enemyInfo.ShowInterval = showitv.GetDouble();
+            std::vector<std::string> vPos = split(showpos.GetString(), ",");
+            float x = floorf(atof(vPos.at(0).c_str()) * visibleSize.width);
+            float y = floorf(atof(vPos.at(1).c_str()) * visibleSize.height);
+            enemyInfo.ShowPos = Vec2(floorf(x), floorf(y));
+            
+            vPos = split(showposoff.GetString(), ",");
+            enemyInfo.ShowPosOff = Vec2(atoi(vPos.at(0).c_str()), atoi(vPos.at(1).c_str()));
+            
+            vPos = split(initpos.GetString(), ",");
+            x = floorf(atof(vPos.at(0).c_str()) * visibleSize.width);
+            y = floorf(atof(vPos.at(1).c_str()) * visibleSize.height);
+            enemyInfo.InitPos = Vec2(x, y);
+            
+            vPos = split(initposoff.GetString(), ",");
+            enemyInfo.InitPosOff = Vec2(atof(vPos.at(0).c_str()), atof(vPos.at(1).c_str()));
+            
+            enemyInfo.CustomScript = customscript.GetString();
+            
+            v_tmpEnemyInfoList.push_back(enemyInfo);
+            log("enemy ID : %d", enemyInfo.EnemyID);
         }
         else if (p.HasMember("stagelogo"))
         {

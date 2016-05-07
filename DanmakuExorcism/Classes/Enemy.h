@@ -22,6 +22,11 @@ public:
     void setEnemyInfo(EnemyInfo info);
     EnemyInfo getEnemyInfo();
     void die();
+    void disappear();
+    void shoot();
+    void stopShoot();
+    Vec2 getShowPos();
+    Rect getEnemyRect(bool isHalf = false);
     
 private:
     Enemy();
@@ -32,12 +37,14 @@ private:
     
     EnemyInfo m_enemyInfo;
     Danmaku* m_danmaku;
-    
     Sprite* _sp;
+    Size m_enemySize;
     
     void setSprite();
     void setEnemyBehavior();
     void setDanmaku();
+    void removeFromPool();
+    void runW3ScriptActions(std::string w3s);
 };
 
 #endif /* defined(__DanmakuExorcism__Enemy__) */

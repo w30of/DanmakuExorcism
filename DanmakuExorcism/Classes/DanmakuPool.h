@@ -22,6 +22,8 @@ public:
     BulletGenerator* getPlayerBullet();
     BulletGenerator* getEnemyBullet();
     void clearPool();
+    void clearOneThing(BulletGeneratorType type, bool withAnimate);
+    void eraseEnemy(BulletGenerator* enemyToErase);
     
     std::vector<BulletGenerator*> v_player;
     std::vector<BulletGenerator*> v_enemy;

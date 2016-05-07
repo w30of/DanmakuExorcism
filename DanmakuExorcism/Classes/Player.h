@@ -37,6 +37,7 @@ public:
     void shoot(bool isShoot);
     void move(Touch* touch);
     void idle();
+    void die();
     
 protected:
     Player();
@@ -46,6 +47,7 @@ private:
     void initialize();
     void updateBullets(float dt);
     void moveAnimate(Direction dir);
+    void checkCollidEnemy();
     
     PlayerType _playerType;
     CC_SYNTHESIZE(int, _HP, HP);

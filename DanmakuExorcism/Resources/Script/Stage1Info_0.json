@@ -1,0 +1,22 @@
+{
+  "enemyinfo": [
+    {
+      "enemy": {
+        "enemyid": 1,
+        "txrid": 0,
+        "shootcount": 1,
+        "shootdelay": 0,
+        "shootitv": 0.3,
+        "dmkid": 1,
+        "showtime": 1,
+        "showcount": 10,
+        "showitv": 0.3,
+        "showpos": "0.3,0.7",
+        "showposoff": "0,0",
+        "initpos": "1.05,1.05",
+        "initposoff": "0,0",
+        "customscript": "BezierTo,2,0.5,0.7,0.2,0.8,0.5,0.9,EaseSineOut;MoveTo,2,1.1,0.9,EaseSineIn"
+      }
+    }
+  ]
+}

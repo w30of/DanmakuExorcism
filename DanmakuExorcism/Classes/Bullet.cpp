@@ -9,6 +9,8 @@
 #include "Bullet.h"
 #include "GameLogic.h"
 
+using namespace std;
+
 Bullet::Bullet()
 {
     m_sprite = nullptr;
@@ -75,13 +77,19 @@ void Bullet::bulletDisable()
     unschedule(schedule_selector(Bullet::move));
 }
 
+void Bullet::bulletDisappear()
+{
+    // TODO: Bullet will not check to hit anyone
+    m_sprite->runAction(Sequence::create(Spawn::create(FadeTo::create(0.3, 0),
+                                                       ScaleTo::create(0.3, 1,2),
+                                                       NULL),
+                                         CallFunc::create([=](){  this->bulletDisable();  }),
+                                         NULL));
+}
+
 void Bullet::setAngle(float a)
 {
     m_bltInfo.a = a;
-//    float a = m_v.getAngle();
-    if (m_sprite) {
-        m_sprite->setRotation(-CC_RADIANS_TO_DEGREES(a));
-    }
 }
 
 
@@ -105,9 +113,11 @@ void Bullet::setTextureByBulletType(BulletType type)
     } else if (type == BULLET_ENEMY_BLUE_1) {
         strFileName = "enemy_bullet_blue_1.png";
         setShouldRotate(false);
+        m_collideRadius = 10;
     } else if (type == BULLET_ENEMY_RED_1) {
         strFileName = "enemy_bullet_red_1.png";
         setShouldRotate(true);
+        m_collideRadius = 10;
     }
     
     if (strFileName.empty()) {
@@ -121,6 +131,7 @@ void Bullet::setTextureByBulletType(BulletType type)
     } else {
         m_sprite->setTexture(strFileName.c_str());
     }
+    m_bulletSize = m_sprite->getContentSize();
 }
 
 void Bullet::updateV()
@@ -137,7 +148,7 @@ void Bullet::updateV()
             }
         }
     }
-    
+    	
     if (m_bltInfo.aLimit) {
         if ((m_bltInfo.aLimit > 0 && m_bltInfo.a >= m_bltInfo.aLimit) || (m_bltInfo.aLimit < 0 && m_bltInfo.a <= m_bltInfo.aLimit)) {
             m_bltInfo.a = m_bltInfo.aLimit;
@@ -155,17 +166,58 @@ void Bullet::updateV()
     m_v = Vec2::forAngle(agl) * m_bltInfo.v;
 }
 
-void Bullet::updateRotate()
+void Bullet::updateRotate(bool forceToDo /* = false */)
 {
-    if (shouldRotate) {
+    if (shouldRotate || forceToDo) {
+        if (forceToDo) updateV();
         float a = m_v.getAngle();
         m_sprite->setRotation(-CC_RADIANS_TO_DEGREES(a));
     }
 }
 
+void Bullet::checkCollide()
+{
+    if (_bulletGeneratorType == PLAYER_BULLET) {
+        vector<BulletGenerator*> v_enemys = DanmakuPool::getInstance()->v_enemy;
+        size_t len = v_enemys.size();
+        Vec2 bltPos = this->getPosition();
+        for (size_t i = 0; i < len; ++i) {
+            Enemy* enemy = (Enemy*)v_enemys.at(i);
+            if (enemy->getEnemyRect().intersectsRect(getBulletRect(this->getPosition()))) {
+                // TODO: enemy HP down
+                this->bulletDisable();
+//                enemy->die();
+            }
+        }
+    }
+    else if (_bulletGeneratorType == ENEMY_BULLET) {
+        Vec2 playerPos = GameLogic::getInstance()->gPlayer->getPosition();
+        int dis = floorf(this->getPosition().distance(playerPos));
+        if (dis < m_collideRadius + 10)
+        {
+            log("danger close!!!!!");
+            if (dis < m_collideRadius) {
+                // TODO: player dead
+//                log("collide!!!!!");
+            }
+        }
+    }
+}
+
+Rect Bullet::getBulletRect(Vec2 pos)
+{
+    return Rect(pos.x - m_bulletSize.width,
+                pos.y - m_bulletSize.height,
+                m_bulletSize.width,
+                m_bulletSize.height);
+}
+
 void Bullet::move(float dt)
 {
+    m_lastPos = this->getPosition();
     this->setPosition(this->getPosition() + m_v * dt);
+    
+    checkCollide();
     
     updateV();
     updateRotate();

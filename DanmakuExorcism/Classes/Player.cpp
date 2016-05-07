@@ -10,6 +10,8 @@
 #include "Bullet.h"
 #include "GameLogic.h"
 
+using namespace std;
+
 Player::Player()
 {
     _playerType = PLAYER_DAOSHI;
@@ -67,15 +69,15 @@ void Player::setPlayerInfo(PlayerType type, int hp)
     std::string strFileName = "";
     if (type == PLAYER_DAOSHI)
     {
-        strFileName = "playertest.png";
+        strFileName = "players/daoshi/n_0.png";
     }
     else if (type == PLAYER_HESHANG)
     {
-        strFileName = "playertest.png";
+        strFileName = "players/daoshi/n_0.png";
     }
     else if (type == PLAYER_JIANKE)
     {
-        strFileName = "playertest.png";
+        strFileName = "players/daoshi/n_0.png";
     }
     if (!_hasInit) {
         _hasInit = true;
@@ -160,11 +162,17 @@ void Player::move(cocos2d::Touch *touch)
     {
         this->setPositionY(_containerSize.height - _sp->getContentSize().height / 2);
     }
+    checkCollidEnemy();
 }
 
 void Player::idle()
 {
     moveAnimate(DIR_NONE);
+}
+
+void Player::die()
+{
+    // TODO: Show die effect
 }
 
 // private :
@@ -204,6 +212,20 @@ void Player::moveAnimate(Direction dir)
         _sp->setFlippedX(false);
     }
     _sp->runAction(a);
+}
+
+void Player::checkCollidEnemy()
+{
+    vector<BulletGenerator*> v_enemys = DanmakuPool::getInstance()->v_enemy;
+    size_t len = v_enemys.size();
+    Vec2 bltPos = this->getPosition();
+    for (size_t i = 0; i < len; ++i) {
+        Enemy* enemy = (Enemy*)v_enemys.at(i);
+        if (enemy->getEnemyRect(true).containsPoint(this->getPosition())) {
+            // TODO: player dead
+            log("player dead!!!");
+        }
+    }
 }
 
 

@@ -70,6 +70,74 @@ void DanmakuPool::clearPool()
     GameLogic::clearDanmakuContainer();
 }
 
+void DanmakuPool::clearOneThing(BulletGeneratorType type, bool withAnimate)
+{
+    switch (type) {
+        case PLAYER:{
+            for (size_t i = 0; i < v_player.size(); ++i) {
+                Player* player = (Player*)v_player.at(i);
+                if (withAnimate) {
+                    player->die();
+                } else {
+                    player->removeFromParent();
+                }
+            }
+            v_player.clear();
+        }
+            break;
+        case ENEMY:{
+            for (size_t i = 0; i < v_enemy.size(); ++i) {
+                Enemy* enemy = (Enemy*)v_enemy.at(i);
+                if (withAnimate) {
+                    enemy->disappear();
+                } else {
+                    enemy->removeFromParent();
+                }
+            }
+            v_enemy.clear();
+        }
+            break;
+        case ENEMY_BULLET:{
+            for (size_t i = 0; i < v_enemyBullet.size(); ++i) {
+                Bullet* blt = (Bullet*)v_enemyBullet.at(i);
+                if (withAnimate) {
+                    blt->bulletDisappear();
+                } else {
+                    blt->bulletDisable();
+                }
+            }
+            v_enemyBullet.clear();
+        }
+            break;
+        case PLAYER_BULLET:{
+            for (size_t i = 0; i < v_playerBullet.size(); ++i) {
+                Bullet* blt = (Bullet*)v_enemyBullet.at(i);
+                if (withAnimate) {
+                    blt->bulletDisappear();
+                } else {
+                    blt->bulletDisable();
+                }
+            }
+            v_playerBullet.clear();
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+void DanmakuPool::eraseEnemy(BulletGenerator *enemyToErase)
+{
+    for(std::vector<BulletGenerator*>::iterator it = v_enemy.begin(); it != v_enemy.end();)
+    {
+        if (*it == enemyToErase) {
+            v_enemy.erase(it);
+            break;
+        }
+        it++;
+    }
+}
+
 
 
 // private funcs...

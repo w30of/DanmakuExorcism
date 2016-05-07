@@ -47,8 +47,14 @@ private:
     void danmaku_1_1(float dt);
     void danmaku_1_3(float dt);
     void danmaku_1_4(float dt);
+    void danmaku_1_5(float dt);
+    void danmaku_1_6(float dt);
     void danmaku_1_7(float dt);
-    void danmaku_1_8(float dt);
+    //    void danmaku_1_8(float dt);
+    void danmaku_1_9(float dt);
+    void danmaku_1_11(float dt);
+    void danmaku_1_12(float dt);
+    void danmaku_1_13(float dt);
 };
 
 #endif /* defined(__DanmakuExorcism__Danmaku__) */
